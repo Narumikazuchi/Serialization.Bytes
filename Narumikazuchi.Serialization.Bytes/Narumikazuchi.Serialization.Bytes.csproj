@@ -46,6 +46,7 @@ For more information about it's usage visit https://github.com/Narumikazuchi/Ser
 
   <ItemGroup>
     <ProjectReference Include="..\Serialization\Narumikazuchi.Serialization\Narumikazuchi.Serialization.csproj" />
+    <ProjectReference Include="..\submodules\Serialization\Narumikazuchi.Serialization\Narumikazuchi.Serialization.csproj" />
   </ItemGroup>
 
 </Project>
