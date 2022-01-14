@@ -1,4 +1,4 @@
-![Logo](../master/logo.png)
+![Logo](../main/logo.png)
 
 # Utility Library
 This library originally contained all classes that I used in my projects more than once. I made them universal instead of being hardcoded for the project in question and added them to the library in order to reuse them whenever needed. With time the library grew and not all aspects were needed in every project. That's when I decided to split them into organized individual pieces and also publish them on github as well as nuget.org.
