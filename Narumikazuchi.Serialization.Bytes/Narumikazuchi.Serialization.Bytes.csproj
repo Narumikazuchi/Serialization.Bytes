@@ -21,7 +21,7 @@ For more information about it's usage visit https://github.com/Narumikazuchi/Ser
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <PackageProjectUrl>https://github.com/Narumikazuchi/Serialization/wiki</PackageProjectUrl>
-    <PackageIcon>Narumikazuchi nuget.png</PackageIcon>
+    <PackageIcon>logo.png</PackageIcon>
     <PackageTags>Serialization; Serializer; Bytes; Byte Representation</PackageTags>
   </PropertyGroup>
 
@@ -29,12 +29,11 @@ For more information about it's usage visit https://github.com/Narumikazuchi/Ser
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>..\..\..\Managed Code Libraries\Custom\net5.0\Narumikazuchi.Serialization.Bytes.xml</DocumentationFile>
-    <OutputPath>..\..\..\Managed Code Libraries\Custom\</OutputPath>
+    <DocumentationFile>Narumikazuchi.Serialization.Bytes.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\Narumikazuchi nuget.png">
+    <None Include="..\logo.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
