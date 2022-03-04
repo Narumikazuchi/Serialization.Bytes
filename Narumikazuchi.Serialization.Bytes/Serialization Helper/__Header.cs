@@ -4,27 +4,26 @@ internal class __Header
 {
     private __Header()
     { }
-    public __Header(ISerializationInfo info)
+    public __Header(ISerializationInfo info!!)
     {
-        ExceptionHelpers.ThrowIfArgumentNull(info);
-        ExceptionHelpers.ThrowIfNullOrEmpty(info.Type.AssemblyQualifiedName,
-                                            nameof(info.Type));
+        ExceptionHelpers.ThrowIfNull(info.Type
+                                         .AssemblyQualifiedName,
+                                     nameof(info.Type));
 
         this.Typename = info.Type.AssemblyQualifiedName!;
         this.IsNull = info.IsNull;
     }
-    public __Header(Type type,
+    public __Header(Type type!!,
                     Object? value)
     {
-        ExceptionHelpers.ThrowIfArgumentNull(type);
-        ExceptionHelpers.ThrowIfNullOrEmpty(type.AssemblyQualifiedName,
-                                            nameof(type));
+        ExceptionHelpers.ThrowIfNull(type.AssemblyQualifiedName,
+                                     nameof(type));
 
         this.Typename = type.AssemblyQualifiedName!;
         this.IsNull = value is null;
     }
 
-    public static __Header FromStream(Stream source,
+    public static __Header FromStream(Stream source!!,
                                       Int64 size,
                                       out UInt64 read)
     {
@@ -52,17 +51,18 @@ internal class __Header
             result.IsNull = true;
         }
 
-        Int32 stringLength = BitConverter.ToInt32(data,
-                                                  offset);
+        Int32 stringLength = BitConverter.ToInt32(value: data,
+                                                  startIndex: offset);
         offset += sizeof(Int32);
-        String typename = Encoding.UTF8.GetString(data,
-                                                  offset,
-                                                  stringLength);
+        String typename = Encoding.UTF8
+                                  .GetString(bytes: data,
+                                             index: offset,
+                                             count: stringLength);
         offset += stringLength;
         result.Typename = typename;
 
-        Int32 count = BitConverter.ToInt32(data, 
-                                           offset);
+        Int32 count = BitConverter.ToInt32(value: data,
+                                           startIndex: offset);
         offset += sizeof(Int32);
 
         for (Int32 i = 0; i < count; i++)
@@ -72,27 +72,30 @@ internal class __Header
             {
                 item.IsNull = true;
             }
-            item.Position = BitConverter.ToInt64(data,
-                                                 offset);
+            item.Position = BitConverter.ToInt64(value: data,
+                                                 startIndex: offset);
             offset += sizeof(Int64);
-            item.Length = BitConverter.ToInt64(data,
-                                               offset);
+            item.Length = BitConverter.ToInt64(value: data,
+                                               startIndex: offset);
             offset += sizeof(Int64);
-            stringLength = BitConverter.ToInt32(data,
-                                                offset);
+            stringLength = BitConverter.ToInt32(value: data,
+                                                startIndex: offset);
             offset += sizeof(Int32);
-            item.Typename = Encoding.UTF8.GetString(data, 
-                                                    offset, 
-                                                    stringLength);
+            item.Typename = Encoding.UTF8
+                                    .GetString(bytes: data,
+                                               index: offset,
+                                               count: stringLength);
             offset += stringLength;
-            stringLength = BitConverter.ToInt32(data,
-                                                offset);
+            stringLength = BitConverter.ToInt32(value: data,
+                                                startIndex: offset);
             offset += sizeof(Int32);
-            item.Name = Encoding.UTF8.GetString(data,
-                                                offset,
-                                                stringLength);
+            item.Name = Encoding.UTF8
+                                .GetString(bytes: data,
+                                           index: offset,
+                                           count: stringLength);
             offset += stringLength;
-            result.Items.Add(item);
+            result.Items
+                  .Add(item);
         }
 
         return result;
@@ -104,7 +107,7 @@ internal class __Header
 
         result.WriteByte(this.NullValue);
         result.Write(BitConverter.GetBytes(this.TypenameGlyphs));
-        result.Write(this._typenameRaw);
+        result.Write(m_TypenameRaw);
         result.Write(BitConverter.GetBytes(this.MemberCount));
         for (Int32 i = 0; i < this.MemberCount; i++)
         {
@@ -119,18 +122,17 @@ internal class __Header
 
     public Boolean IsNull { get; set; }
     public Int32 TypenameGlyphs => 
-        this._typenameRaw
-            .Length;
+        m_TypenameRaw.Length;
     public String Typename
     {
-        get => this._typename;
+        get => m_Typename;
         set
         {
-            ExceptionHelpers.ThrowIfNullOrEmpty(value);
+            ExceptionHelpers.ThrowIfArgumentNull(value);
 
-            this._typename = value;
-            this._typenameRaw = Encoding.UTF8
-                                        .GetBytes(value);
+            m_Typename = value;
+            m_TypenameRaw = Encoding.UTF8
+                                    .GetBytes(value);
         }
     }
     public Int32 MemberCount => 
@@ -158,6 +160,6 @@ internal class __Header
         }
     }
 
-    private String _typename = String.Empty;
-    private Byte[] _typenameRaw = Array.Empty<Byte>();
+    private String m_Typename = String.Empty;
+    private Byte[] m_TypenameRaw = Array.Empty<Byte>();
 }

@@ -8,5 +8,6 @@
 [EditorBrowsable(EditorBrowsableState.Never)]
 public interface IByteSerializerDeserializer<TSerializable> :
     IByteSerializer<TSerializable>,
-    IByteDeserializer<TSerializable>
+    IByteDeserializer<TSerializable>,
+    ISerializerDeserializer<TSerializable>
 { }

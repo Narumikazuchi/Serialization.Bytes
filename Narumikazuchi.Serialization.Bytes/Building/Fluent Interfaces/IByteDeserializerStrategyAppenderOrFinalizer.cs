@@ -12,5 +12,5 @@ public interface IByteDeserializerStrategyAppenderOrFinalizer<TSerializable> :
     /// Finalizes the configuration and returns the configured <see cref="IByteDeserializer{TSerializable}"/>.
     /// </summary>
     /// <returns>The configured <see cref="IByteDeserializer{TSerializable}"/></returns>
-    public IByteDeserializer<TSerializable> Construct();
+    public IByteDeserializer<TSerializable> Create();
 }

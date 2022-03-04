@@ -10,9 +10,9 @@ internal class __HeaderItem
         result.Write(BitConverter.GetBytes(this.Position));
         result.Write(BitConverter.GetBytes(this.Length));
         result.Write(BitConverter.GetBytes(this.TypenameGlyphs));
-        result.Write(this._typenameRaw);
+        result.Write(m_TypenameRaw);
         result.Write(BitConverter.GetBytes(this.NameGlyphs));
-        result.Write(this._nameRaw);
+        result.Write(m_NameRaw);
 
         result.Position = 0;
         return result;
@@ -21,32 +21,29 @@ internal class __HeaderItem
     public Int64 Position { get; set; }
     public Int64 Length { get; set; }
     public Boolean IsNull { get; set; }
-    public Int32 TypenameGlyphs => this._typenameRaw.Length;
+    public Int32 TypenameGlyphs => 
+        m_TypenameRaw.Length;
     public String Typename
     {
-        get => this._typename;
+        get => m_Typename;
         set
         {
-            if (String.IsNullOrWhiteSpace(value))
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-            this._typename = value;
-            this._typenameRaw = Encoding.UTF8.GetBytes(value);
+            ExceptionHelpers.ThrowIfArgumentNull(value);
+            m_Typename = value;
+            m_TypenameRaw = Encoding.UTF8.GetBytes(value);
         }
     }
-    public Int32 NameGlyphs => this._nameRaw.Length;
+    public Int32 NameGlyphs => 
+        m_NameRaw.Length;
     public String Name
     {
-        get => this._name;
+        get => m_Name;
         set
         {
-            if (String.IsNullOrWhiteSpace(value))
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-            this._name = value;
-            this._nameRaw = Encoding.UTF8.GetBytes(value);
+            ExceptionHelpers.ThrowIfArgumentNull(value);
+            m_Name = value;
+            m_NameRaw = Encoding.UTF8
+                                .GetBytes(s: value);
         }
     }
 
@@ -62,8 +59,8 @@ internal class __HeaderItem
         }
     }
 
-    private String _typename = String.Empty;
-    private String _name = String.Empty;
-    private Byte[] _typenameRaw = Array.Empty<Byte>();
-    private Byte[] _nameRaw = Array.Empty<Byte>();
+    private String m_Typename = String.Empty;
+    private String m_Name = String.Empty;
+    private Byte[] m_TypenameRaw = Array.Empty<Byte>();
+    private Byte[] m_NameRaw = Array.Empty<Byte>();
 }

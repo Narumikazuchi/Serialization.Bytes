@@ -2,27 +2,22 @@
 
 internal sealed partial class __ByteSerializer<TSerializable>
 {
-    public __ByteSerializer(__BuildInformation<TSerializable> info)
+    public __ByteSerializer(__ByteSerializerBuilder<TSerializable> builder!!)
     {
-        ExceptionHelpers.ThrowIfArgumentNull(info);
-
-        foreach (KeyValuePair<Type, ISerializationStrategy<Byte[]>> strategy in info.SerializationStrategies)
+        foreach (KeyValuePair<Type, ISerializationStrategy<Byte[]>> strategy in builder.SerializationStrategies)
         {
-            this._serializationStrategies
-                .Add(item: strategy);
+            m_SerializationStrategies.Add(item: strategy);
         }
-        foreach (KeyValuePair<Type, IDeserializationStrategy<Byte[]>> strategy in info.DeserializationStrategies)
+        foreach (KeyValuePair<Type, IDeserializationStrategy<Byte[]>> strategy in builder.DeserializationStrategies)
         {
-            this._deserializationStrategies
-                .Add(item: strategy);
+            m_DeserializationStrategies.Add(item: strategy);
         }
-        foreach (KeyValuePair<Type, ISerializationDeserializationStrategy<Byte[]>> strategy in info.TwoWayStrategies)
+        foreach (KeyValuePair<Type, ISerializationDeserializationStrategy<Byte[]>> strategy in builder.TwoWayStrategies)
         {
-            this._twoWayStrategies
-                .Add(item: strategy);
+            m_TwoWayStrategies.Add(item: strategy);
         }
-        this._dataGetter = info.DataGetter;
-        this._dataSetter = info.DataSetter;
+        m_DataGetter = builder.DataGetter;
+        m_DataSetter = builder.DataSetter;
     }
 }
 
@@ -33,10 +28,10 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
                                      TSerializable? graph)
     {
         ISerializationInfoAdder info;
-        if (this._dataGetter is not null)
+        if (m_DataGetter is not null)
         {
             info = CreateSerializationInfo.From(from: graph,
-                                                write: this._dataGetter);
+                                                write: m_DataGetter);
             return this.SerializeWithInfo(stream: stream,
                                           info: info);
         }
@@ -52,21 +47,21 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
         Type type = graph.GetType();
         if (graph is not ISerializable serializable)
         {
-            foreach (KeyValuePair<Type, ISerializationStrategy<Byte[]>> kv in this._serializationStrategies)
+            foreach (KeyValuePair<Type, ISerializationStrategy<Byte[]>> kv in m_SerializationStrategies)
             {
                 if (kv.Key == type)
                 {
-                    return this.SerializeWithStrategy(stream: stream,
+                    return __ByteSerializer<TSerializable>.SerializeWithStrategy(stream: stream,
                                                       graph: graph,
                                                       type: type,
                                                       strategy: kv.Value);
                 }
             }
-            foreach (KeyValuePair<Type, ISerializationDeserializationStrategy<Byte[]>> kv in this._twoWayStrategies)
+            foreach (KeyValuePair<Type, ISerializationDeserializationStrategy<Byte[]>> kv in m_TwoWayStrategies)
             {
                 if (kv.Key == type)
                 {
-                    return this.SerializeWithStrategy(stream: stream,
+                    return __ByteSerializer<TSerializable>.SerializeWithStrategy(stream: stream,
                                                       graph: graph,
                                                       type: type,
                                                       strategy: kv.Value);
@@ -80,7 +75,7 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
         }
         info = CreateSerializationInfo.From(from: serializable);
         return this.SerializeWithInfo(stream: stream,
-                                        info: info);
+                                      info: info);
     }
 
     private UInt64 SerializeWithInfo(Stream stream,
@@ -97,11 +92,11 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
             };
 
             Boolean added = false;
-            foreach (KeyValuePair<Type, ISerializationStrategy<Byte[]>> kv in this._serializationStrategies)
+            foreach (KeyValuePair<Type, ISerializationStrategy<Byte[]>> kv in m_SerializationStrategies)
             {
                 if (kv.Key == member.MemberType)
                 {
-                    this.SerializeWithStrategy(stream: body,
+                    __ByteSerializer<TSerializable>.SerializeWithStrategy(stream: body,
                                                item: item,
                                                data: member,
                                                strategy: kv.Value);
@@ -116,11 +111,11 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
                 continue;
             }
 
-            foreach (KeyValuePair<Type, ISerializationDeserializationStrategy<Byte[]>> kv in this._twoWayStrategies)
+            foreach (KeyValuePair<Type, ISerializationDeserializationStrategy<Byte[]>> kv in m_TwoWayStrategies)
             {
                 if (kv.Key == member.MemberType)
                 {
-                    this.SerializeWithStrategy(stream: body,
+                    __ByteSerializer<TSerializable>.SerializeWithStrategy(stream: body,
                                                item: item,
                                                data: member,
                                                strategy: kv.Value);
@@ -168,12 +163,12 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
                           value: member.MemberType
                                        .FullName);
             List<String> values = new();
-            foreach (KeyValuePair<Type, ISerializationStrategy<Byte[]>> kv in this._serializationStrategies)
+            foreach (KeyValuePair<Type, ISerializationStrategy<Byte[]>> kv in m_SerializationStrategies)
             {
                 String value = $"key: {kv.Key.FullName};";
                 values.Add(value);
             }
-            foreach (KeyValuePair<Type, ISerializationDeserializationStrategy<Byte[]>> kv in this._twoWayStrategies)
+            foreach (KeyValuePair<Type, ISerializationDeserializationStrategy<Byte[]>> kv in m_TwoWayStrategies)
             {
                 String value = $"key: {kv.Key.FullName};";
                 values.Add(value);
@@ -200,10 +195,10 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
         return total;
     }
 
-    private UInt64 SerializeWithStrategy(Stream stream,
-                                         TSerializable? graph,
-                                         Type type,
-                                         ISerializationStrategy<Byte[]> strategy)
+    private static UInt64 SerializeWithStrategy(Stream stream,
+                                                TSerializable? graph,
+                                                Type type,
+                                                ISerializationStrategy<Byte[]> strategy)
     {
 
         __Header header = new(type: type,
@@ -226,10 +221,10 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
         return total;
     }
 
-    private void SerializeWithStrategy(Stream stream,
-                                       __HeaderItem item,
-                                       MemberState data,
-                                       ISerializationStrategy<Byte[]> strategy)
+    private static void SerializeWithStrategy(Stream stream,
+                                              __HeaderItem item,
+                                              MemberState data,
+                                              ISerializationStrategy<Byte[]> strategy)
     {
         item.Typename = data.MemberType
                             .AssemblyQualifiedName!;
@@ -264,15 +259,14 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
         {
             IDictionary<Type, ISerializationStrategy<Byte[]>> strategies;
 
-            if (this._serializationStrategies
-                    .Count > 0)
+            if (m_SerializationStrategies.Count > 0)
             {
-                strategies = this._serializationStrategies;
+                strategies = m_SerializationStrategies;
             }
             else
             {
                 strategies = new Dictionary<Type, ISerializationStrategy<Byte[]>>();
-                foreach (KeyValuePair<Type, ISerializationDeserializationStrategy<Byte[]>> kv in this._twoWayStrategies)
+                foreach (KeyValuePair<Type, ISerializationDeserializationStrategy<Byte[]>> kv in m_TwoWayStrategies)
                 {
                     strategies.Add(key: kv.Key,
                                    value: kv.Value);
@@ -280,8 +274,8 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
             }
 
             serializer = CreateByteSerializer
-                        .ForSerialization()
                         .ConfigureForOwnedType<ISerializable>()
+                        .ForSerialization()
                         .UseStrategies(strategies)
                         .Construct();
             __Cache.CreatedOwnedSerializers
@@ -327,7 +321,6 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
                                      out tempRead);
         read += tempRead;
 
-
         if (sizeofObject < 8 ||
             sizeofHead < 13 ||
             sizeofBody == 0)
@@ -358,25 +351,21 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
         Int64 bodyStart = 3 * sizeof(UInt64) + sizeofHead;
 
         // Strategy-approach
-        if (this._deserializationStrategies
-                .ContainsKey(type))
+        if (m_DeserializationStrategies .ContainsKey(type))
         {
             Byte[] body = new Byte[sizeofBody];
             stream.Read(buffer: body,
                         offset: 0,
                         count: (Int32)sizeofBody);
-            return (TSerializable?)this._deserializationStrategies[type]
-                                       .Deserialize(body);
+            return (TSerializable?)m_DeserializationStrategies[type].Deserialize(body);
         }
-        if (this._twoWayStrategies
-                .ContainsKey(type))
+        if (m_TwoWayStrategies.ContainsKey(type))
         {
             Byte[] body = new Byte[sizeofBody];
             stream.Read(buffer: body,
                         offset: 0,
                         count: (Int32)sizeofBody);
-            return (TSerializable?)this._twoWayStrategies[type]
-                                       .Deserialize(body);
+            return (TSerializable?)m_TwoWayStrategies[type].Deserialize(body);
         }
 
         // No strategy means we do it ourselves
@@ -405,9 +394,9 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
         }
 
         // Do we have a setter?
-        if (this._dataSetter is not null)
+        if (m_DataSetter is not null)
         {
-            return this._dataSetter.Invoke(info);
+            return m_DataSetter.Invoke(info);
         }
 
         // Do we implement the interface?
@@ -454,11 +443,11 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
         }
 
         // Attempting through known strategies
-        foreach (KeyValuePair<Type, IDeserializationStrategy<Byte[]>> kv in this._deserializationStrategies)
+        foreach (KeyValuePair<Type, IDeserializationStrategy<Byte[]>> kv in m_DeserializationStrategies)
         {
             if (kv.Key == type)
             {
-                member = this.DeserializeWithStrategy(stream: stream,
+                member = __ByteSerializer<TSerializable>.DeserializeWithStrategy(stream: stream,
                                                       bodyStart: bodyStart,
                                                       item: item,
                                                       strategy: kv.Value);
@@ -468,11 +457,11 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
                 return true;
             }
         }
-        foreach (KeyValuePair<Type, ISerializationDeserializationStrategy<Byte[]>> kv in this._twoWayStrategies)
+        foreach (KeyValuePair<Type, ISerializationDeserializationStrategy<Byte[]>> kv in m_TwoWayStrategies)
         {
             if (kv.Key == type)
             {
-                member = this.DeserializeWithStrategy(stream: stream,
+                member = __ByteSerializer<TSerializable>.DeserializeWithStrategy(stream: stream,
                                                       bodyStart: bodyStart,
                                                       item: item,
                                                       strategy: kv.Value);
@@ -489,9 +478,9 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
                           i.GetGenericTypeDefinition() == typeof(IDeserializable<>)))
         {
             MethodInfo method;
-            if (_usedInterfaceDeserializations.ContainsKey(type))
+            if (s_UsedInterfaceDeserializations.ContainsKey(type))
             {
-                method = _usedInterfaceDeserializations[type];
+                method = s_UsedInterfaceDeserializations[type];
             }
             else
             {
@@ -500,7 +489,7 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
                                         bindingAttr: BindingFlags.Instance | BindingFlags.NonPublic,
                                         types: new Type[] { typeof(Stream), typeof(Int64), typeof(__HeaderItem), typeof(UInt64).MakeByRefType() })!
                              .MakeGenericMethod(type);
-                _usedInterfaceDeserializations.Add(key: type,
+                s_UsedInterfaceDeserializations.Add(key: type,
                                                    value: method);
             }
 
@@ -517,10 +506,10 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
         return false;
     }
 
-    private Object? DeserializeWithStrategy(Stream stream,
-                                            Int64 bodyStart,
-                                            __HeaderItem item,
-                                            IDeserializationStrategy<Byte[]> strategy)
+    private static Object? DeserializeWithStrategy(Stream stream,
+                                                   Int64 bodyStart,
+                                                   __HeaderItem item,
+                                                   IDeserializationStrategy<Byte[]> strategy)
     {
         stream.Position = bodyStart + item.Position;
         Byte[] bytes = new Byte[item.Length];
@@ -556,15 +545,14 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
             __Cache.CreatedDeserializers[typeof(TResult)] = new List<Object>();
             IDictionary<Type, IDeserializationStrategy<Byte[]>> strategies;
 
-            if (this._deserializationStrategies
-                    .Count > 0)
+            if (m_DeserializationStrategies.Count > 0)
             {
-                strategies = this._deserializationStrategies;
+                strategies = m_DeserializationStrategies;
             }
             else
             {
                 strategies = new Dictionary<Type, IDeserializationStrategy<Byte[]>>();
-                foreach (KeyValuePair<Type, ISerializationDeserializationStrategy<Byte[]>> kv in this._twoWayStrategies)
+                foreach (KeyValuePair<Type, ISerializationDeserializationStrategy<Byte[]>> kv in m_TwoWayStrategies)
                 {
                     strategies.Add(key: kv.Key,
                                    value: kv.Value);
@@ -572,10 +560,10 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
             }
 
             deserializer = CreateByteSerializer
-                          .ForDeserialization()
                           .ConfigureForOwnedType<TResult>()
+                          .ForDeserialization()
                           .UseStrategies(strategies)
-                          .Construct();
+                          .Create();
             __Cache.CreatedDeserializers[typeof(TResult)]
                    .Add(deserializer);
         }
@@ -616,26 +604,25 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
     }
 
     internal Action<TSerializable, ISerializationInfoAdder>? DataGetter =>
-        this._dataGetter;
+        m_DataGetter;
 
     internal Func<ISerializationInfoGetter, TSerializable>? DataSetter =>
-        this._dataSetter;
+        m_DataSetter;
 
     public IDictionary<Type, ISerializationStrategy<Byte[]>> SerializationStrategies =>
-        this._serializationStrategies;
+        m_SerializationStrategies;
     public IDictionary<Type, IDeserializationStrategy<Byte[]>> DeserializationStrategies =>
-        this._deserializationStrategies;
+        m_DeserializationStrategies;
     public IDictionary<Type, ISerializationDeserializationStrategy<Byte[]>> TwoWayStrategies =>
-        this._twoWayStrategies;
+        m_TwoWayStrategies;
 
-    private static readonly IDictionary<Type, MethodInfo> _usedInterfaceDeserializations = new Dictionary<Type, MethodInfo>();
-    private readonly IDictionary<Type, ISerializationStrategy<Byte[]>> _serializationStrategies = new Dictionary<Type, ISerializationStrategy<Byte[]>>();
-    private readonly IDictionary<Type, IDeserializationStrategy<Byte[]>> _deserializationStrategies = new Dictionary<Type, IDeserializationStrategy<Byte[]>>();
-    private readonly IDictionary<Type, ISerializationDeserializationStrategy<Byte[]>> _twoWayStrategies = new Dictionary<Type, ISerializationDeserializationStrategy<Byte[]>>();
-    private readonly Action<TSerializable, ISerializationInfoAdder>? _dataGetter;
-    private readonly Func<ISerializationInfoGetter, TSerializable>? _dataSetter;
+    private static readonly IDictionary<Type, MethodInfo> s_UsedInterfaceDeserializations = new Dictionary<Type, MethodInfo>();
+    private readonly IDictionary<Type, ISerializationStrategy<Byte[]>> m_SerializationStrategies = new Dictionary<Type, ISerializationStrategy<Byte[]>>();
+    private readonly IDictionary<Type, IDeserializationStrategy<Byte[]>> m_DeserializationStrategies = new Dictionary<Type, IDeserializationStrategy<Byte[]>>();
+    private readonly IDictionary<Type, ISerializationDeserializationStrategy<Byte[]>> m_TwoWayStrategies = new Dictionary<Type, ISerializationDeserializationStrategy<Byte[]>>();
+    private readonly Action<TSerializable, ISerializationInfoAdder>? m_DataGetter;
+    private readonly Func<ISerializationInfoGetter, TSerializable>? m_DataSetter;
 
-#pragma warning disable IDE1006
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String STREAM_DOES_NOT_SUPPORT_READING = "The specified stream does not support reading.";
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -646,34 +633,33 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
     private const String COULD_NOT_SERIALIZE_TYPE = "Couldn't serialize type. (Are you missing a serialization strategy? Consider implementing the ISerializable interface, if it's a type you own.)";
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String COULD_NOT_DESERIALIZE_TYPE = "Couldn't deserialize type. (Are you missing a serialization strategy? Consider implementing the IDeserializable´1 interface, if it's a type you own.)";
-#pragma warning restore
 }
 
 // IByteDeserializer<T>
 partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
 {
     [return: MaybeNull]
-    public TSerializable? Deserialize([DisallowNull] Stream stream) =>
+    public TSerializable? Deserialize([DisallowNull] Stream stream!!) =>
         this.Deserialize(stream: stream,
                          offset: -1,
                          read: out UInt64 _,
                          actionAfter: SerializationFinishAction.None);
     [return: MaybeNull]
-    public TSerializable? Deserialize([DisallowNull] Stream stream, 
+    public TSerializable? Deserialize([DisallowNull] Stream stream!!, 
                                       in Int64 offset) =>
         this.Deserialize(stream: stream,
                          offset: offset,
                          read: out UInt64 _,
                          actionAfter: SerializationFinishAction.None);
     [return: MaybeNull]
-    public TSerializable? Deserialize([DisallowNull] Stream stream, 
+    public TSerializable? Deserialize([DisallowNull] Stream stream!!, 
                                       out UInt64 read) =>
         this.Deserialize(stream: stream,
                          offset: -1,
                          read: out read,
                          actionAfter: SerializationFinishAction.None);
     [return: MaybeNull]
-    public TSerializable? Deserialize([DisallowNull] Stream stream, 
+    public TSerializable? Deserialize([DisallowNull] Stream stream!!, 
                                       in Int64 offset, 
                                       out UInt64 read) =>
         this.Deserialize(stream: stream,
@@ -681,14 +667,14 @@ partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
                          read: out read,
                          actionAfter: SerializationFinishAction.None);
     [return: MaybeNull]
-    public TSerializable? Deserialize([DisallowNull] Stream stream, 
+    public TSerializable? Deserialize([DisallowNull] Stream stream!!, 
                                       in SerializationFinishAction actionAfter) =>
         this.Deserialize(stream: stream,
                          offset: -1,
                          read: out UInt64 _,
                          actionAfter: actionAfter);
     [return: MaybeNull]
-    public TSerializable? Deserialize([DisallowNull] Stream stream, 
+    public TSerializable? Deserialize([DisallowNull] Stream stream!!, 
                                       in Int64 offset, 
                                       in SerializationFinishAction actionAfter) =>
         this.Deserialize(stream: stream,
@@ -696,7 +682,7 @@ partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
                          read: out UInt64 _,
                          actionAfter: actionAfter);
     [return: MaybeNull]
-    public TSerializable? Deserialize([DisallowNull] Stream stream, 
+    public TSerializable? Deserialize([DisallowNull] Stream stream!!, 
                                       out UInt64 read, 
                                       in SerializationFinishAction actionAfter) =>
         this.Deserialize(stream: stream,
@@ -704,12 +690,11 @@ partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
                          read: out read,
                          actionAfter: actionAfter);
     [return: MaybeNull]
-    public TSerializable? Deserialize([DisallowNull] Stream stream, 
+    public TSerializable? Deserialize([DisallowNull] Stream stream!!, 
                                       in Int64 offset, 
                                       out UInt64 read, 
                                       in SerializationFinishAction actionAfter)
     {
-        ExceptionHelpers.ThrowIfArgumentNull(stream);
         if (!stream.CanRead)
         {
             throw new InvalidOperationException(message: STREAM_DOES_NOT_SUPPORT_READING);
@@ -740,14 +725,14 @@ partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
         return result;
     }
 
-    public Boolean TryDeserialize([DisallowNull] Stream stream, 
+    public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
                                   [AllowNull] out TSerializable? result) =>
         this.TryDeserialize(stream: stream,
                             offset: -1,
                             read: out UInt64 _,
                             actionAfter: SerializationFinishAction.None,
                             result: out result);
-    public Boolean TryDeserialize([DisallowNull] Stream stream, 
+    public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
                                   in Int64 offset, 
                                   [AllowNull] out TSerializable? result) =>
         this.TryDeserialize(stream: stream,
@@ -755,7 +740,7 @@ partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
                             read: out UInt64 _,
                             actionAfter: SerializationFinishAction.None,
                             result: out result);
-    public Boolean TryDeserialize([DisallowNull] Stream stream, 
+    public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
                                   out UInt64 read, 
                                   [AllowNull] out TSerializable? result) =>
         this.TryDeserialize(stream: stream,
@@ -763,7 +748,7 @@ partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
                             read: out read,
                             actionAfter: SerializationFinishAction.None,
                             result: out result);
-    public Boolean TryDeserialize([DisallowNull] Stream stream, 
+    public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
                                   in Int64 offset, 
                                   out UInt64 read, 
                                   [AllowNull] out TSerializable? result) =>
@@ -772,7 +757,7 @@ partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
                             read: out read,
                             actionAfter: SerializationFinishAction.None,
                             result: out result);
-    public Boolean TryDeserialize([DisallowNull] Stream stream, 
+    public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
                                   in SerializationFinishAction actionAfter, 
                                   [AllowNull] out TSerializable? result) =>
         this.TryDeserialize(stream: stream,
@@ -780,7 +765,7 @@ partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
                             read: out UInt64 _,
                             actionAfter: actionAfter,
                             result: out result);
-    public Boolean TryDeserialize([DisallowNull] Stream stream, 
+    public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
                                   in Int64 offset, 
                                   in SerializationFinishAction actionAfter, 
                                   [AllowNull] out TSerializable? result) =>
@@ -789,7 +774,7 @@ partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
                             read: out UInt64 _,
                             actionAfter: actionAfter,
                             result: out result);
-    public Boolean TryDeserialize([DisallowNull] Stream stream, 
+    public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
                                   out UInt64 read, 
                                   in SerializationFinishAction actionAfter, 
                                   [AllowNull] out TSerializable? result) =>
@@ -798,7 +783,7 @@ partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
                             read: out read,
                             actionAfter: actionAfter,
                             result: out result);
-    public Boolean TryDeserialize([DisallowNull] Stream stream, 
+    public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
                                   in Int64 offset, 
                                   out UInt64 read, 
                                   in SerializationFinishAction actionAfter, 
@@ -806,8 +791,8 @@ partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
     {
         if (stream is null ||
             !stream.CanRead ||
-            offset > -1 &&
-            !stream.CanSeek)
+            (offset > -1 &&
+            !stream.CanSeek))
         {
             read = 0;
             result = default;
@@ -838,32 +823,31 @@ partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
 // IByteSerializer<T>
 partial class __ByteSerializer<TSerializable> : IByteSerializer<TSerializable>
 {
-    public UInt64 Serialize([DisallowNull] Stream stream, 
+    public UInt64 Serialize([DisallowNull] Stream stream!!, 
                             [AllowNull] TSerializable? graph) =>
             this.Serialize(stream: stream,
                            graph: graph,
                            offset: -1,
                            actionAfter: SerializationFinishAction.None);
-    public UInt64 Serialize([DisallowNull] Stream stream, 
+    public UInt64 Serialize([DisallowNull] Stream stream!!, 
                             [AllowNull] TSerializable? graph, 
                             in Int64 offset) =>
             this.Serialize(stream: stream,
                            graph: graph,
                            offset: offset,
                            actionAfter: SerializationFinishAction.None);
-    public UInt64 Serialize([DisallowNull] Stream stream, 
+    public UInt64 Serialize([DisallowNull] Stream stream!!, 
                             [AllowNull] TSerializable? graph, 
                             in SerializationFinishAction actionAfter) =>
             this.Serialize(stream: stream,
                            graph: graph,
                            offset: -1,
                            actionAfter: actionAfter);
-    public UInt64 Serialize([DisallowNull] Stream stream, 
+    public UInt64 Serialize([DisallowNull] Stream stream!!, 
                             [AllowNull] TSerializable? graph, 
                             in Int64 offset, 
                             in SerializationFinishAction actionAfter)
     {
-        ExceptionHelpers.ThrowIfArgumentNull(stream);
         if (!stream.CanWrite)
         {
             throw new InvalidOperationException(message: STREAM_DOES_NOT_SUPPORT_WRITING);
@@ -903,14 +887,14 @@ partial class __ByteSerializer<TSerializable> : IByteSerializer<TSerializable>
         return result;
     }
 
-    public Boolean TrySerialize([DisallowNull] Stream stream, 
+    public Boolean TrySerialize([DisallowNull] Stream stream!!, 
                                 [AllowNull] TSerializable? graph) =>
             this.TrySerialize(stream: stream,
                               graph: graph,
                               offset: -1,
                               written: out UInt64 _,
                               actionAfter: SerializationFinishAction.None);
-    public Boolean TrySerialize([DisallowNull] Stream stream, 
+    public Boolean TrySerialize([DisallowNull] Stream stream!!, 
                                 [AllowNull] TSerializable? graph, 
                                 in Int64 offset) =>
             this.TrySerialize(stream: stream,
@@ -918,7 +902,7 @@ partial class __ByteSerializer<TSerializable> : IByteSerializer<TSerializable>
                               offset: offset,
                               written: out UInt64 _,
                               actionAfter: SerializationFinishAction.None);
-    public Boolean TrySerialize([DisallowNull] Stream stream, 
+    public Boolean TrySerialize([DisallowNull] Stream stream!!, 
                                 [AllowNull] TSerializable? graph, 
                                 out UInt64 written) =>
             this.TrySerialize(stream: stream,
@@ -926,7 +910,7 @@ partial class __ByteSerializer<TSerializable> : IByteSerializer<TSerializable>
                               offset: -1,
                               written: out written,
                               actionAfter: SerializationFinishAction.None);
-    public Boolean TrySerialize([DisallowNull] Stream stream, 
+    public Boolean TrySerialize([DisallowNull] Stream stream!!, 
                                 [AllowNull] TSerializable graph, 
                                 in Int64 offset, 
                                 out UInt64 written) =>
@@ -935,7 +919,7 @@ partial class __ByteSerializer<TSerializable> : IByteSerializer<TSerializable>
                               offset: offset,
                               written: out written,
                               actionAfter: SerializationFinishAction.None);
-    public Boolean TrySerialize([DisallowNull] Stream stream, 
+    public Boolean TrySerialize([DisallowNull] Stream stream!!, 
                                 [AllowNull] TSerializable? graph, 
                                 in SerializationFinishAction actionAfter) =>
             this.TrySerialize(stream: stream,
@@ -943,7 +927,7 @@ partial class __ByteSerializer<TSerializable> : IByteSerializer<TSerializable>
                               offset: -1,
                               written: out UInt64 _,
                               actionAfter: actionAfter);
-    public Boolean TrySerialize([DisallowNull] Stream stream, 
+    public Boolean TrySerialize([DisallowNull] Stream stream!!, 
                                 [AllowNull] TSerializable? graph, 
                                 in Int64 offset, 
                                 in SerializationFinishAction actionAfter) =>
@@ -952,7 +936,7 @@ partial class __ByteSerializer<TSerializable> : IByteSerializer<TSerializable>
                               offset: offset,
                               written: out UInt64 _,
                               actionAfter: actionAfter);
-    public Boolean TrySerialize([DisallowNull] Stream stream, 
+    public Boolean TrySerialize([DisallowNull] Stream stream!!, 
                                 [AllowNull] TSerializable? graph, 
                                 out UInt64 written, 
                                 in SerializationFinishAction actionAfter) =>
@@ -961,7 +945,7 @@ partial class __ByteSerializer<TSerializable> : IByteSerializer<TSerializable>
                               offset: -1,
                               written: out written,
                               actionAfter: actionAfter);
-    public Boolean TrySerialize([DisallowNull] Stream stream, 
+    public Boolean TrySerialize([DisallowNull] Stream stream!!, 
                                 [AllowNull] TSerializable? graph, 
                                 in Int64 offset, 
                                 out UInt64 written, 
@@ -969,8 +953,8 @@ partial class __ByteSerializer<TSerializable> : IByteSerializer<TSerializable>
     {
         if (stream is null ||
             !stream.CanWrite ||
-            offset > -1 &&
-            !stream.CanSeek)
+            (offset > -1 &&
+            !stream.CanSeek))
         {
             written = 0;
             return false;
@@ -1012,23 +996,17 @@ partial class __ByteSerializer<TSerializable> : IUsesSerializationStrategies
     {
         get
         {
-            if (this._serializationStrategies
-                    .Count > 0)
+            if (m_SerializationStrategies.Count > 0)
             {
-                return this._serializationStrategies
-                           .Keys;
+                return m_SerializationStrategies.Keys;
             }
-            if (this._deserializationStrategies
-                    .Count > 0)
+            if (m_DeserializationStrategies.Count > 0)
             {
-                return this._deserializationStrategies
-                           .Keys;
+                return m_DeserializationStrategies.Keys;
             }
-            if (this._twoWayStrategies
-                    .Count > 0)
+            if (m_TwoWayStrategies.Count > 0)
             {
-                return this._twoWayStrategies
-                           .Keys;
+                return m_TwoWayStrategies.Keys;
             }
             throw new ImpossibleState();
         }

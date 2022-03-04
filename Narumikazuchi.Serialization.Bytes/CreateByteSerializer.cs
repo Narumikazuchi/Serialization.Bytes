@@ -6,20 +6,16 @@
 public static class CreateByteSerializer
 {
     /// <summary>
-    /// Builds an <see cref="IByteDeserializer{TSerializable}"/>.
+    /// Configure the serializer for a type that you do not own or that does not implement <see cref="IDeserializable{TSelf}"/> or <see cref="ISerializable"/>, 
+    /// depending on the later defined type of serialization.
     /// </summary>
-    public static IByteDeserializerTypeConfigurator ForDeserialization() =>
-        new __ConfigurationInformation();
+    public static ISerializationForeignTypeConfigurator<TSerializable> ConfigureForForeignType<TSerializable>() =>
+        new __ByteSerializerBuilder<TSerializable>();
 
     /// <summary>
-    /// Builds an <see cref="IByteSerializer{TSerializable}"/>.
+    /// Configure the serializer for a type that does implement <see cref="IDeserializable{TSelf}"/> or <see cref="ISerializable"/>, 
+    /// depending on the later defined type of serialization.
     /// </summary>
-    public static IByteSerializerTypeConfigurator ForSerialization() =>
-        new __ConfigurationInformation();
-
-    /// <summary>
-    /// Builds an <see cref="IByteSerializerDeserializer{TSerializable}"/>.
-    /// </summary>
-    public static IByteSerializerDeserializerTypeConfigurator ForSerializationAndDeserialization() =>
-        new __ConfigurationInformation();
+    public static ISerializationOwnedTypeConfigurator<TSerializable> ConfigureForOwnedType<TSerializable>() =>
+        new __ByteSerializerBuilder<TSerializable>();
 }
