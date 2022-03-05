@@ -277,7 +277,7 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
                         .ConfigureForOwnedType<ISerializable>()
                         .ForSerialization()
                         .UseStrategies(strategies)
-                        .Construct();
+                        .Create();
             __Cache.CreatedOwnedSerializers
                    .Add(key: data.MemberType,
                         value: new List<IByteSerializer<ISerializable>>

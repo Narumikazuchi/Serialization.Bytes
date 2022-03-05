@@ -161,7 +161,7 @@ partial class __ByteSerializerBuilder<TSerializable> : IByteSerializerStrategyAp
 // IByteSerializerStrategyAppenderOrFinalizer<T>
 partial class __ByteSerializerBuilder<TSerializable> : IByteSerializerStrategyAppenderOrFinalizer<TSerializable>
 {
-    IByteSerializer<TSerializable> IByteSerializerStrategyAppenderOrFinalizer<TSerializable>.Construct()
+    IByteSerializer<TSerializable> IByteSerializerStrategyAppenderOrFinalizer<TSerializable>.Create()
     {
         __ByteSerializer<TSerializable> serializer;
         if (__Cache.CreatedSerializers
@@ -247,7 +247,7 @@ partial class __ByteSerializerBuilder<TSerializable> : IByteSerializerDeserializ
 // IByteSerializerDeserializerStrategyAppenderOrFinalizer<T>
 partial class __ByteSerializerBuilder<TSerializable> : IByteSerializerDeserializerStrategyAppenderOrFinalizer<TSerializable>
 {
-    IByteSerializerDeserializer<TSerializable> IByteSerializerDeserializerStrategyAppenderOrFinalizer<TSerializable>.Construct()
+    IByteSerializerDeserializer<TSerializable> IByteSerializerDeserializerStrategyAppenderOrFinalizer<TSerializable>.Create()
     {
         __ByteSerializer<TSerializable> serializer;
         if (__Cache.CreatedSerializersDeserializers
