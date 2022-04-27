@@ -639,57 +639,6 @@ partial class __ByteSerializer<TSerializable> : IByteSerializerDeserializer<TSer
 partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
 {
     [return: MaybeNull]
-    public TSerializable? Deserialize([DisallowNull] Stream stream!!) =>
-        this.Deserialize(stream: stream,
-                         offset: -1,
-                         read: out UInt64 _,
-                         actionAfter: SerializationFinishAction.None);
-    [return: MaybeNull]
-    public TSerializable? Deserialize([DisallowNull] Stream stream!!, 
-                                      in Int64 offset) =>
-        this.Deserialize(stream: stream,
-                         offset: offset,
-                         read: out UInt64 _,
-                         actionAfter: SerializationFinishAction.None);
-    [return: MaybeNull]
-    public TSerializable? Deserialize([DisallowNull] Stream stream!!, 
-                                      out UInt64 read) =>
-        this.Deserialize(stream: stream,
-                         offset: -1,
-                         read: out read,
-                         actionAfter: SerializationFinishAction.None);
-    [return: MaybeNull]
-    public TSerializable? Deserialize([DisallowNull] Stream stream!!, 
-                                      in Int64 offset, 
-                                      out UInt64 read) =>
-        this.Deserialize(stream: stream,
-                         offset: offset,
-                         read: out read,
-                         actionAfter: SerializationFinishAction.None);
-    [return: MaybeNull]
-    public TSerializable? Deserialize([DisallowNull] Stream stream!!, 
-                                      in SerializationFinishAction actionAfter) =>
-        this.Deserialize(stream: stream,
-                         offset: -1,
-                         read: out UInt64 _,
-                         actionAfter: actionAfter);
-    [return: MaybeNull]
-    public TSerializable? Deserialize([DisallowNull] Stream stream!!, 
-                                      in Int64 offset, 
-                                      in SerializationFinishAction actionAfter) =>
-        this.Deserialize(stream: stream,
-                         offset: offset,
-                         read: out UInt64 _,
-                         actionAfter: actionAfter);
-    [return: MaybeNull]
-    public TSerializable? Deserialize([DisallowNull] Stream stream!!, 
-                                      out UInt64 read, 
-                                      in SerializationFinishAction actionAfter) =>
-        this.Deserialize(stream: stream,
-                         offset: -1,
-                         read: out read,
-                         actionAfter: actionAfter);
-    [return: MaybeNull]
     public TSerializable? Deserialize([DisallowNull] Stream stream!!, 
                                       in Int64 offset, 
                                       out UInt64 read, 
@@ -725,64 +674,6 @@ partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
         return result;
     }
 
-    public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
-                                  [AllowNull] out TSerializable? result) =>
-        this.TryDeserialize(stream: stream,
-                            offset: -1,
-                            read: out UInt64 _,
-                            actionAfter: SerializationFinishAction.None,
-                            result: out result);
-    public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
-                                  in Int64 offset, 
-                                  [AllowNull] out TSerializable? result) =>
-        this.TryDeserialize(stream: stream,
-                            offset: offset,
-                            read: out UInt64 _,
-                            actionAfter: SerializationFinishAction.None,
-                            result: out result);
-    public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
-                                  out UInt64 read, 
-                                  [AllowNull] out TSerializable? result) =>
-        this.TryDeserialize(stream: stream,
-                            offset: -1,
-                            read: out read,
-                            actionAfter: SerializationFinishAction.None,
-                            result: out result);
-    public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
-                                  in Int64 offset, 
-                                  out UInt64 read, 
-                                  [AllowNull] out TSerializable? result) =>
-        this.TryDeserialize(stream: stream,
-                            offset: offset,
-                            read: out read,
-                            actionAfter: SerializationFinishAction.None,
-                            result: out result);
-    public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
-                                  in SerializationFinishAction actionAfter, 
-                                  [AllowNull] out TSerializable? result) =>
-        this.TryDeserialize(stream: stream,
-                            offset: -1,
-                            read: out UInt64 _,
-                            actionAfter: actionAfter,
-                            result: out result);
-    public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
-                                  in Int64 offset, 
-                                  in SerializationFinishAction actionAfter, 
-                                  [AllowNull] out TSerializable? result) =>
-        this.TryDeserialize(stream: stream,
-                            offset: offset,
-                            read: out UInt64 _,
-                            actionAfter: actionAfter,
-                            result: out result);
-    public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
-                                  out UInt64 read, 
-                                  in SerializationFinishAction actionAfter, 
-                                  [AllowNull] out TSerializable? result) =>
-        this.TryDeserialize(stream: stream,
-                            offset: -1,
-                            read: out read,
-                            actionAfter: actionAfter,
-                            result: out result);
     public Boolean TryDeserialize([DisallowNull] Stream stream!!, 
                                   in Int64 offset, 
                                   out UInt64 read, 
@@ -823,26 +714,6 @@ partial class __ByteSerializer<TSerializable> : IByteDeserializer<TSerializable>
 // IByteSerializer<T>
 partial class __ByteSerializer<TSerializable> : IByteSerializer<TSerializable>
 {
-    public UInt64 Serialize([DisallowNull] Stream stream!!, 
-                            [AllowNull] TSerializable? graph) =>
-            this.Serialize(stream: stream,
-                           graph: graph,
-                           offset: -1,
-                           actionAfter: SerializationFinishAction.None);
-    public UInt64 Serialize([DisallowNull] Stream stream!!, 
-                            [AllowNull] TSerializable? graph, 
-                            in Int64 offset) =>
-            this.Serialize(stream: stream,
-                           graph: graph,
-                           offset: offset,
-                           actionAfter: SerializationFinishAction.None);
-    public UInt64 Serialize([DisallowNull] Stream stream!!, 
-                            [AllowNull] TSerializable? graph, 
-                            in SerializationFinishAction actionAfter) =>
-            this.Serialize(stream: stream,
-                           graph: graph,
-                           offset: -1,
-                           actionAfter: actionAfter);
     public UInt64 Serialize([DisallowNull] Stream stream!!, 
                             [AllowNull] TSerializable? graph, 
                             in Int64 offset, 
@@ -887,64 +758,6 @@ partial class __ByteSerializer<TSerializable> : IByteSerializer<TSerializable>
         return result;
     }
 
-    public Boolean TrySerialize([DisallowNull] Stream stream!!, 
-                                [AllowNull] TSerializable? graph) =>
-            this.TrySerialize(stream: stream,
-                              graph: graph,
-                              offset: -1,
-                              written: out UInt64 _,
-                              actionAfter: SerializationFinishAction.None);
-    public Boolean TrySerialize([DisallowNull] Stream stream!!, 
-                                [AllowNull] TSerializable? graph, 
-                                in Int64 offset) =>
-            this.TrySerialize(stream: stream,
-                              graph: graph,
-                              offset: offset,
-                              written: out UInt64 _,
-                              actionAfter: SerializationFinishAction.None);
-    public Boolean TrySerialize([DisallowNull] Stream stream!!, 
-                                [AllowNull] TSerializable? graph, 
-                                out UInt64 written) =>
-            this.TrySerialize(stream: stream,
-                              graph: graph,
-                              offset: -1,
-                              written: out written,
-                              actionAfter: SerializationFinishAction.None);
-    public Boolean TrySerialize([DisallowNull] Stream stream!!, 
-                                [AllowNull] TSerializable graph, 
-                                in Int64 offset, 
-                                out UInt64 written) =>
-            this.TrySerialize(stream: stream,
-                              graph: graph,
-                              offset: offset,
-                              written: out written,
-                              actionAfter: SerializationFinishAction.None);
-    public Boolean TrySerialize([DisallowNull] Stream stream!!, 
-                                [AllowNull] TSerializable? graph, 
-                                in SerializationFinishAction actionAfter) =>
-            this.TrySerialize(stream: stream,
-                              graph: graph,
-                              offset: -1,
-                              written: out UInt64 _,
-                              actionAfter: actionAfter);
-    public Boolean TrySerialize([DisallowNull] Stream stream!!, 
-                                [AllowNull] TSerializable? graph, 
-                                in Int64 offset, 
-                                in SerializationFinishAction actionAfter) =>
-            this.TrySerialize(stream: stream,
-                              graph: graph,
-                              offset: offset,
-                              written: out UInt64 _,
-                              actionAfter: actionAfter);
-    public Boolean TrySerialize([DisallowNull] Stream stream!!, 
-                                [AllowNull] TSerializable? graph, 
-                                out UInt64 written, 
-                                in SerializationFinishAction actionAfter) =>
-            this.TrySerialize(stream: stream,
-                              graph: graph,
-                              offset: -1,
-                              written: out written,
-                              actionAfter: actionAfter);
     public Boolean TrySerialize([DisallowNull] Stream stream!!, 
                                 [AllowNull] TSerializable? graph, 
                                 in Int64 offset, 

@@ -19,28 +19,34 @@ internal class __HeaderItem
     }
 
     public Int64 Position { get; set; }
+
     public Int64 Length { get; set; }
+
     public Boolean IsNull { get; set; }
+
     public Int32 TypenameGlyphs => 
         m_TypenameRaw.Length;
+
     public String Typename
     {
         get => m_Typename;
         set
         {
-            ExceptionHelpers.ThrowIfArgumentNull(value);
+            ArgumentNullException.ThrowIfNull(value);
             m_Typename = value;
             m_TypenameRaw = Encoding.UTF8.GetBytes(value);
         }
     }
+
     public Int32 NameGlyphs => 
         m_NameRaw.Length;
+
     public String Name
     {
         get => m_Name;
         set
         {
-            ExceptionHelpers.ThrowIfArgumentNull(value);
+            ArgumentNullException.ThrowIfNull(value);
             m_Name = value;
             m_NameRaw = Encoding.UTF8
                                 .GetBytes(s: value);

@@ -1,0 +1,457 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Narumikazuchi.Serialization.Bytes</name>
+    </assembly>
+    <members>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IByteDeserializer`1">
+            <summary>
+            Represents the functionality of an <see cref="T:Narumikazuchi.Serialization.IDeserializer`1"/>,
+            which will deserialize the given array of <see cref="T:System.Byte"/> into it's managed object of type <typeparamref name="TSerializable"/>.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IByteDeserializerDefaultStrategyAppender`1">
+            <summary>
+            Configures a <see cref="T:Narumikazuchi.Serialization.Bytes.IByteDeserializer`1"/> to use specified strategies for deserialization.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.IByteDeserializerDefaultStrategyAppender`1.UseDefaultStrategies">
+            <summary>
+            Configures the <see cref="T:Narumikazuchi.Serialization.Bytes.IByteDeserializer`1"/> to use the integrated default strategies for primitive types.
+            </summary>
+            <remarks>
+            Default strategies will not override any prior custom strategies that have been configured. Furthermore every strategy targeting one
+            of the types that the default strategies target will overwrite the default strategy with the custom one.<para/>
+            The default strategies include strategies for the following types: <see cref="T:System.Boolean"/>, <see cref="T:System.Byte"/>, <see cref="T:System.Char"/>,
+            <see cref="T:System.Double"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Int32"/>, <see cref="T:System.Int64"/>, <see cref="T:System.IntPtr"/>, <see cref="T:System.SByte"/>,
+            <see cref="T:System.Single"/>, <see cref="T:System.UInt16"/>, <see cref="T:System.UInt32"/>, <see cref="T:System.UInt64"/>, <see cref="T:System.UIntPtr"/>, <see cref="T:System.DateTime"/>,
+            <see cref="T:System.DateOnly"/>, <see cref="T:System.TimeOnly"/>, <see cref="T:System.TimeSpan"/>, <see cref="T:System.Guid"/>, <see cref="T:System.Half"/>, <see cref="T:System.String"/>.
+            </remarks>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IByteDeserializerStrategyAppender`1">
+            <summary>
+            Configures a <see cref="T:Narumikazuchi.Serialization.Bytes.IByteDeserializer`1"/> to use specified strategies for serialization.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.IByteDeserializerStrategyAppender`1.UseStrategyForType``1(Narumikazuchi.Serialization.IDeserializationStrategy{System.Byte[],``0})">
+            <summary>
+            Configures the <see cref="T:Narumikazuchi.Serialization.Bytes.IByteDeserializer`1"/> to use the specified strategy for the specified <typeparamref name="TFrom"/>.
+            </summary>
+            <param name="strategy">The strategy to use for the deserialization process of the type <typeparamref name="TFrom"/>.</param>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.IByteDeserializerStrategyAppender`1.UseStrategies(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Type,Narumikazuchi.Serialization.IDeserializationStrategy{System.Byte[]}}})">
+            <summary>
+            Configures the <see cref="T:Narumikazuchi.Serialization.Bytes.IByteDeserializer`1"/> to use the specified strategies for the deserialization of the associated types.
+            </summary>
+            <param name="strategies">The collections of strategies to use for deserialization.</param>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IByteDeserializerStrategyAppenderOrFinalizer`1">
+            <summary>
+            Configures a <see cref="T:Narumikazuchi.Serialization.Bytes.IByteDeserializer`1"/> to use specified strategies for deserialization or finalizes the configuration.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.IByteDeserializerStrategyAppenderOrFinalizer`1.Create">
+            <summary>
+            Finalizes the configuration and returns the configured <see cref="T:Narumikazuchi.Serialization.Bytes.IByteDeserializer`1"/>.
+            </summary>
+            <returns>The configured <see cref="T:Narumikazuchi.Serialization.Bytes.IByteDeserializer`1"/></returns>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IByteSerializer`1">
+            <summary>
+            Represents the functionality of an <see cref="T:Narumikazuchi.Serialization.ISerializer`1"/>,
+            which will serialize the given objects into an array of <see cref="T:System.Byte"/>.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IByteSerializerDefaultStrategyAppender`1">
+            <summary>
+            Configures a <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializer`1"/> to use specified strategies for serialization.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.IByteSerializerDefaultStrategyAppender`1.UseDefaultStrategies">
+            <summary>
+            Configures the <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializer`1"/> to use the integrated default strategies for primitive types.
+            </summary>
+            <remarks>
+            Default strategies will not override any prior custom strategies that have been configured. Furthermore every strategy targeting one
+            of the types that the default strategies target will overwrite the default strategy with the custom one.<para/>
+            The default strategies include strategies for the following types: <see cref="T:System.Boolean"/>, <see cref="T:System.Byte"/>, <see cref="T:System.Char"/>,
+            <see cref="T:System.Double"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Int32"/>, <see cref="T:System.Int64"/>, <see cref="T:System.IntPtr"/>, <see cref="T:System.SByte"/>,
+            <see cref="T:System.Single"/>, <see cref="T:System.UInt16"/>, <see cref="T:System.UInt32"/>, <see cref="T:System.UInt64"/>, <see cref="T:System.UIntPtr"/>, <see cref="T:System.DateTime"/>,
+            <see cref="T:System.DateOnly"/>, <see cref="T:System.TimeOnly"/>, <see cref="T:System.TimeSpan"/>, <see cref="T:System.Guid"/>, <see cref="T:System.Half"/>, <see cref="T:System.String"/>.
+            </remarks>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializer`1">
+            <summary>
+            Represents the functionality of both an <see cref="T:Narumikazuchi.Serialization.ISerializer`1"/> and <see cref="T:Narumikazuchi.Serialization.IDeserializer`1"/>,
+            which will serialize the given objects into an array of <see cref="T:System.Byte"/>.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializerDefaultStrategyAppender`1">
+            <summary>
+            Configures a <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializer`1"/> to use specified strategies for serialization.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializerDefaultStrategyAppender`1.UseDefaultStrategies">
+            <summary>
+            Configures the <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializer`1"/> to use the integrated default strategies for primitive types.
+            </summary>
+            <remarks>
+            Default strategies will not override any prior custom strategies that have been configured. Furthermore every strategy targeting one
+            of the types that the default strategies target will overwrite the default strategy with the custom one.<para/>
+            The default strategies include strategies for the following types: <see cref="T:System.Boolean"/>, <see cref="T:System.Byte"/>, <see cref="T:System.Char"/>,
+            <see cref="T:System.Double"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Int32"/>, <see cref="T:System.Int64"/>, <see cref="T:System.IntPtr"/>, <see cref="T:System.SByte"/>,
+            <see cref="T:System.Single"/>, <see cref="T:System.UInt16"/>, <see cref="T:System.UInt32"/>, <see cref="T:System.UInt64"/>, <see cref="T:System.UIntPtr"/>, <see cref="T:System.DateTime"/>,
+            <see cref="T:System.DateOnly"/>, <see cref="T:System.TimeOnly"/>, <see cref="T:System.TimeSpan"/>, <see cref="T:System.Guid"/>, <see cref="T:System.Half"/>, <see cref="T:System.String"/>.
+            </remarks>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializerStrategyAppender`1">
+            <summary>
+            Configures a <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializer`1"/> to use specified strategies for serialization.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializerStrategyAppender`1.UseStrategyForType``1(Narumikazuchi.Serialization.ISerializationDeserializationStrategy{System.Byte[],``0})">
+            <summary>
+            Configures the <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializer`1"/> to use the specified strategy for the specified <typeparamref name="TFrom"/>.
+            </summary>
+            <param name="strategy">The strategy to use for the serialization process of the type <typeparamref name="TFrom"/>.</param>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializerStrategyAppender`1.UseStrategies(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Type,Narumikazuchi.Serialization.ISerializationDeserializationStrategy{System.Byte[]}}})">
+            <summary>
+            Configures the <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializer`1"/> to use the specified strategies for the serialization of the associated types.
+            </summary>
+            <param name="strategies">The collections of strategies to use for serialization.</param>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializerStrategyAppenderOrFinalizer`1">
+            <summary>
+            Configures a <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializer`1"/> to use specified strategies for serialization or finalizes the configuration.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializerStrategyAppenderOrFinalizer`1.Create">
+            <summary>
+            Finalizes the configuration and returns the configured <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializer`1"/>.
+            </summary>
+            <returns>The configured <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializer`1"/></returns>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IByteSerializerStrategyAppender`1">
+            <summary>
+            Configures a <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializer`1"/> to use specified strategies for serialization.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.IByteSerializerStrategyAppender`1.UseStrategyForType``1(Narumikazuchi.Serialization.ISerializationStrategy{System.Byte[],``0})">
+            <summary>
+            Configures the <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializer`1"/> to use the specified strategy for the specified <typeparamref name="TFrom"/>.
+            </summary>
+            <param name="strategy">The strategy to use for the serialization process of the type <typeparamref name="TFrom"/>.</param>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.IByteSerializerStrategyAppender`1.UseStrategies(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Type,Narumikazuchi.Serialization.ISerializationStrategy{System.Byte[]}}})">
+            <summary>
+            Configures the <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializer`1"/> to use the specified strategies for the serialization of the associated types.
+            </summary>
+            <param name="strategies">The collections of strategies to use for serialization.</param>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IByteSerializerStrategyAppenderOrFinalizer`1">
+            <summary>
+            Configures a <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializer`1"/> to use specified strategies for serialization or finalizes the configuration.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.IByteSerializerStrategyAppenderOrFinalizer`1.Create">
+            <summary>
+            Finalizes the configuration and returns the configured <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializer`1"/>.
+            </summary>
+            <returns>The configured <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializer`1"/></returns>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.ISerializationForeignTypeConfigurator`1">
+            <summary>
+            Configures the <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializer`1"/> for a specific type.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.ISerializationForeignTypeConfigurator`1.ForDeserialization(System.Func{Narumikazuchi.Serialization.ISerializationInfoGetter,`0})">
+            <summary>
+            Builds the serializer for deserialization.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.ISerializationForeignTypeConfigurator`1.ForDeserialization(Narumikazuchi.Serialization.IDeserializationStrategy{System.Byte[],`0})">
+            <summary>
+            Builds the serializer for deserialization.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.ISerializationForeignTypeConfigurator`1.ForSerialization(System.Action{`0,Narumikazuchi.Serialization.ISerializationInfoAdder})">
+            <summary>
+            Builds the serializer for serialization.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.ISerializationForeignTypeConfigurator`1.ForSerialization(Narumikazuchi.Serialization.ISerializationStrategy{System.Byte[],`0})">
+            <summary>
+            Builds the serializer for serialization.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.ISerializationForeignTypeConfigurator`1.ForSerializationAndDeserialization(System.Action{`0,Narumikazuchi.Serialization.ISerializationInfoAdder},System.Func{Narumikazuchi.Serialization.ISerializationInfoGetter,`0})">
+            <summary>
+            Builds the serializer for deserialization and serialization.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.ISerializationForeignTypeConfigurator`1.ForSerializationAndDeserialization(Narumikazuchi.Serialization.ISerializationDeserializationStrategy{System.Byte[],`0})">
+            <summary>
+            Builds the serializer for deserialization and serialization.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.ISerializationOwnedTypeConfigurator`1">
+            <summary>
+            Configures the <see cref="T:Narumikazuchi.Serialization.Bytes.IByteSerializer`1"/> for a specific type.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.ISerializationOwnedTypeConfigurator`1.ForDeserialization">
+            <summary>
+            Builds the serializer for deserialization.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.ISerializationOwnedTypeConfigurator`1.ForSerialization">
+            <summary>
+            Builds the serializer for serialization.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.ISerializationOwnedTypeConfigurator`1.ForSerializationAndDeserialization">
+            <summary>
+            Builds the serializer for deserialization and serialization.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.CreateByteSerializer">
+            <summary>
+            A builder class to configure a serializer and/or deserializer for you needs.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.CreateByteSerializer.ConfigureForForeignType``1">
+            <summary>
+            Configure the serializer for a type that you do not own or that does not implement <see cref="T:Narumikazuchi.Serialization.IDeserializable`1"/> or <see cref="T:Narumikazuchi.Serialization.ISerializable"/>, 
+            depending on the later defined type of serialization.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Serialization.Bytes.CreateByteSerializer.ConfigureForOwnedType``1">
+            <summary>
+            Configure the serializer for a type that does implement <see cref="T:Narumikazuchi.Serialization.IDeserializable`1"/> or <see cref="T:Narumikazuchi.Serialization.ISerializable"/>, 
+            depending on the later defined type of serialization.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies">
+            <summary>
+            Contains all predefined strategies that are utilized by the <see cref="M:Narumikazuchi.Serialization.Bytes.IByteDeserializerDefaultStrategyAppender`1.UseDefaultStrategies"/>, <see cref="M:Narumikazuchi.Serialization.Bytes.IByteSerializerDefaultStrategyAppender`1.UseDefaultStrategies"/> and
+            <see cref="M:Narumikazuchi.Serialization.Bytes.IByteSerializerDeserializerDefaultStrategyAppender`1.UseDefaultStrategies"/> builder methods.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Boolean">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Boolean"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Boolean.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Char">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Char"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Char.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.DateOnly">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.DateOnly"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.DateOnly.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.DateTime">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.DateTime"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.DateTime.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Double">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Double"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Double.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Guid">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Guid"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Guid.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Half">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Half"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Half.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Int16">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Int16"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Int16.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Int32">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Int32"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Int32.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Int64">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Int64"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Int64.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.All">
+            <summary>
+            Contains all predefined strategies in an <see cref="T:System.Collections.Generic.IReadOnlyDictionary`2"/>.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.IntPtr">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.IntPtr"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.IntPtr.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.SByte">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.SByte"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.SByte.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Single">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Single"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Single.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.String">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.String"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.String.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.TimeOnly">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.TimeOnly"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.TimeOnly.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.TimeSpan">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.TimeSpan"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.TimeSpan.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.UInt16">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.UInt16"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.UInt16.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.UInt32">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.UInt32"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.UInt32.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.UInt64">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.UInt64"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.UInt64.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.UIntPtr">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.UIntPtr"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.UIntPtr.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
+    </members>
+</doc>

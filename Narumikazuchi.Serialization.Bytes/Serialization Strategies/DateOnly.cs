@@ -12,20 +12,11 @@ partial class IntegratedSerializationStrategies
         /// </summary>
         public static ref DateOnly Reference =>
             ref s_Reference;
-
     }
 
     partial struct DateOnly
     {
         private static DateOnly s_Reference = new();
-        private static IDeserializationStrategy<System.Byte[], System.DateOnly> s_DeserializationStrategy = s_Reference;
-        private static ISerializationStrategy<System.Byte[], System.DateOnly> s_SerializationStrategy = s_Reference;
-    }
-
-    partial struct DateOnly : IDeserializationStrategy<System.Byte[]>
-    {
-        Object? IDeserializationStrategy<System.Byte[]>.Deserialize(System.Byte[] input) =>
-            s_DeserializationStrategy.Deserialize(input);
     }
 
     partial struct DateOnly : IDeserializationStrategy<System.Byte[], System.DateOnly>
@@ -38,18 +29,6 @@ partial class IntegratedSerializationStrategies
             return new(year: year,
                        month: month,
                        day: day);
-        }
-    }
-
-    partial struct DateOnly : ISerializationStrategy<System.Byte[]>
-    {
-        System.Byte[] ISerializationStrategy<System.Byte[]>.Serialize(Object? input)
-        {
-            if (input is not DateOnly value)
-            {
-                throw new InvalidCastException();
-            }
-            return s_SerializationStrategy.Serialize(value);
         }
     }
 

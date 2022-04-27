@@ -15,7 +15,7 @@ For more information about it's usage visit https://github.com/Narumikazuchi/Ser
     <Copyright>©2021 Narumikazuchi</Copyright>
     <RepositoryUrl>https://github.com/Narumikazuchi/Serialization</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.0.0</Version>
+    <Version>2.1.0</Version>
     <PackageReleaseNotes>
     </PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -44,7 +44,8 @@ For more information about it's usage visit https://github.com/Narumikazuchi/Ser
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\submodules\Serialization\Narumikazuchi.Serialization\Narumikazuchi.Serialization.csproj" />
+    <PackageReference Include="Narumikazuchi" Version="2.2.0" />
+    <PackageReference Include="Narumikazuchi.Serialization" Version="2.1.0" />
   </ItemGroup>
 
 </Project>

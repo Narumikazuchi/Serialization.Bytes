@@ -6,9 +6,9 @@ internal class __Header
     { }
     public __Header(ISerializationInfo info!!)
     {
-        ExceptionHelpers.ThrowIfNull(info.Type
-                                         .AssemblyQualifiedName,
-                                     nameof(info.Type));
+        ArgumentNullException.ThrowIfNull(info.Type
+                                              .AssemblyQualifiedName,
+                                          nameof(info.Type));
 
         this.Typename = info.Type.AssemblyQualifiedName!;
         this.IsNull = info.IsNull;
@@ -16,8 +16,8 @@ internal class __Header
     public __Header(Type type!!,
                     Object? value)
     {
-        ExceptionHelpers.ThrowIfNull(type.AssemblyQualifiedName,
-                                     nameof(type));
+        ArgumentNullException.ThrowIfNull(type.AssemblyQualifiedName,
+                                          nameof(type));
 
         this.Typename = type.AssemblyQualifiedName!;
         this.IsNull = value is null;
@@ -121,23 +121,27 @@ internal class __Header
     }
 
     public Boolean IsNull { get; set; }
+
     public Int32 TypenameGlyphs => 
         m_TypenameRaw.Length;
+
     public String Typename
     {
         get => m_Typename;
         set
         {
-            ExceptionHelpers.ThrowIfArgumentNull(value);
+            ArgumentNullException.ThrowIfNull(value);
 
             m_Typename = value;
             m_TypenameRaw = Encoding.UTF8
                                     .GetBytes(value);
         }
     }
+
     public Int32 MemberCount => 
         this.Items
             .Count;
+
     public Int64 Size
     {
         get
@@ -146,6 +150,7 @@ internal class __Header
             return temp.Length;
         }
     }
+
     public IList<__HeaderItem> Items { get; } = new List<__HeaderItem>();
 
     private Byte NullValue

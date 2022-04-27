@@ -7,12 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Narumikazuchi.Serialization
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "UnitTest\UnitTest.csproj", "{9AE7C9FB-231F-435F-ADCD-F8EEF90B98DB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "submodules", "submodules", "{4D2FD71F-BA1B-4F26-8E51-DF79720F393D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Narumikazuchi.Serialization", "submodules\Serialization\Narumikazuchi.Serialization\Narumikazuchi.Serialization.csproj", "{93C3E146-8F26-4D74-A2BF-13DF92011482}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Narumikazuchi", "submodules\Serialization\submodules\Common\Narumikazuchi\Narumikazuchi.csproj", "{E1DF28B2-C62B-4121-9917-78329198E1D3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,21 +21,9 @@ Global
 		{9AE7C9FB-231F-435F-ADCD-F8EEF90B98DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AE7C9FB-231F-435F-ADCD-F8EEF90B98DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AE7C9FB-231F-435F-ADCD-F8EEF90B98DB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{93C3E146-8F26-4D74-A2BF-13DF92011482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{93C3E146-8F26-4D74-A2BF-13DF92011482}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{93C3E146-8F26-4D74-A2BF-13DF92011482}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{93C3E146-8F26-4D74-A2BF-13DF92011482}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E1DF28B2-C62B-4121-9917-78329198E1D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1DF28B2-C62B-4121-9917-78329198E1D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1DF28B2-C62B-4121-9917-78329198E1D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1DF28B2-C62B-4121-9917-78329198E1D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{93C3E146-8F26-4D74-A2BF-13DF92011482} = {4D2FD71F-BA1B-4F26-8E51-DF79720F393D}
-		{E1DF28B2-C62B-4121-9917-78329198E1D3} = {4D2FD71F-BA1B-4F26-8E51-DF79720F393D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AD0D8A25-7DEF-44AA-B525-387AA1ECC6DB}

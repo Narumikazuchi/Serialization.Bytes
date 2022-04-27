@@ -12,20 +12,11 @@ partial class IntegratedSerializationStrategies
         /// </summary>
         public static ref String Reference =>
             ref s_Reference;
-
     }
 
     partial struct String
     {
         private static String s_Reference = new();
-        private static IDeserializationStrategy<System.Byte[], System.String> s_DeserializationStrategy = s_Reference;
-        private static ISerializationStrategy<System.Byte[], System.String> s_SerializationStrategy = s_Reference;
-    }
-
-    partial struct String : IDeserializationStrategy<System.Byte[]>
-    {
-        Object? IDeserializationStrategy<System.Byte[]>.Deserialize(System.Byte[] input) =>
-            s_DeserializationStrategy.Deserialize(input);
     }
 
     partial struct String : IDeserializationStrategy<System.Byte[], System.String>
@@ -42,18 +33,6 @@ partial class IntegratedSerializationStrategies
                            .GetString(bytes: input,
                                       index: 4,
                                       count: size);
-        }
-    }
-
-    partial struct String : ISerializationStrategy<System.Byte[]>
-    {
-        System.Byte[] ISerializationStrategy<System.Byte[]>.Serialize(Object? input)
-        {
-            if (input is not String value)
-            {
-                throw new InvalidCastException();
-            }
-            return s_SerializationStrategy.Serialize(value);
         }
     }
 

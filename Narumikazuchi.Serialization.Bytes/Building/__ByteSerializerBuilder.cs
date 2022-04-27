@@ -7,8 +7,10 @@ internal sealed partial class __ByteSerializerBuilder<TSerializable>
 
     public IDictionary<Type, ISerializationStrategy<Byte[]>> SerializationStrategies =>
         m_SerializationStrategies;
+
     public IDictionary<Type, IDeserializationStrategy<Byte[]>> DeserializationStrategies =>
         m_DeserializationStrategies;
+
     public IDictionary<Type, ISerializationDeserializationStrategy<Byte[]>> TwoWayStrategies =>
         m_TwoWayStrategies;
 
@@ -344,8 +346,10 @@ partial class __ByteSerializerBuilder<TSerializable> : ISerializationOwnedTypeCo
 {
     IByteDeserializerDefaultStrategyAppender<TSerializable> ISerializationOwnedTypeConfigurator<TSerializable>.ForDeserialization() =>
         this;
+
     IByteSerializerDefaultStrategyAppender<TSerializable> ISerializationOwnedTypeConfigurator<TSerializable>.ForSerialization() =>
         this;
+
     IByteSerializerDeserializerDefaultStrategyAppender<TSerializable> ISerializationOwnedTypeConfigurator<TSerializable>.ForSerializationAndDeserialization() =>
         this;
 }
