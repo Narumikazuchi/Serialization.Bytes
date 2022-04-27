@@ -1,7 +1,7 @@
 ![Logo](../main/logo.png)
 
 # Description
-This project provides a simple interface for a user to serialize data. The interface(s) can be implemented by calsses and structs and then serialized using any serializer build on this architecture.
+Provides an implementation of the interfaces in the Narumikazuchi.Serialization library. The implementation serializes data from and into an array of bytes that represent the specified data.
   
 ## Installation
 [![NuGet](https://img.shields.io/nuget/v/Narumikazuchi.Serialization.svg)](https://www.nuget.org/packages/Narumikazuchi.Serialization)  
