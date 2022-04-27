@@ -13,7 +13,7 @@
     <Copyright>©2021 Narumikazuchi</Copyright>
     <RepositoryUrl>https://github.com/Narumikazuchi/Serialization.Bytes</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.1.0</Version>
+    <Version>2.0.1</Version>
     <PackageReleaseNotes>
     </PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
