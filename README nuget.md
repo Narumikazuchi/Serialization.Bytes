@@ -1,0 +1,1 @@
+An implementation of the Narumikazuchi.Serialization interfaces to serialize classes into an array of bytes. For more information about it's usage visit the [wiki](https://github.com/Narumikazuchi/Serialization/wiki).
