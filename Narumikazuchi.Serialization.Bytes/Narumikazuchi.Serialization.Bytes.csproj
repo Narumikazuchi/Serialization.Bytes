@@ -1,58 +1,53 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <PlatformTarget>x64</PlatformTarget>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <LangVersion>preview</LangVersion>
-    <EnablePreviewFeatures>True</EnablePreviewFeatures>
-    <Authors>Narumikazuchi</Authors>
-    <Description>An implementation of the Narumikazuchi.Serialization interfaces to serialize classes into an array of bytes. For more information about it's usage visit the [wiki](https://github.com/Narumikazuchi/Serialization/wiki).</Description>
-    <Copyright>©2021 Narumikazuchi</Copyright>
-    <RepositoryUrl>https://github.com/Narumikazuchi/Serialization.Bytes</RepositoryUrl>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.0.1</Version>
-    <PackageReleaseNotes>
-    </PackageReleaseNotes>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <NoPackageAnalysis>true</NoPackageAnalysis>
-    <PackageProjectUrl>https://github.com/Narumikazuchi/Serialization.Bytes/wiki</PackageProjectUrl>
-    <PackageIcon>logo.png</PackageIcon>
-	<PackageReadmeFile>README nuget.md</PackageReadmeFile>
-    <PackageTags>Serialization; Serializer; Bytes; Byte Representation</PackageTags>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<PlatformTarget>x64</PlatformTarget>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<LangVersion>preview</LangVersion>
+		<EnablePreviewFeatures>True</EnablePreviewFeatures>
+		<DocumentationFile>Narumikazuchi.Serialization.Bytes.xml</DocumentationFile>
+		<Authors>Narumikazuchi</Authors>
+		<Description>An implementation of the Narumikazuchi.Serialization interfaces to serialize classes into an array of bytes. For more information about it's usage visit the [wiki](https://github.com/Narumikazuchi/Serialization/wiki).</Description>
+		<Copyright>©2021 Narumikazuchi</Copyright>
+		<RepositoryUrl>https://github.com/Narumikazuchi/Serialization.Bytes</RepositoryUrl>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Version>2.1.0</Version>
+		<PackageReleaseNotes>
+		</PackageReleaseNotes>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<NoPackageAnalysis>true</NoPackageAnalysis>
+		<PackageProjectUrl>https://github.com/Narumikazuchi/Serialization.Bytes/wiki</PackageProjectUrl>
+		<PackageIcon>logo.png</PackageIcon>
+		<PackageReadmeFile>README nuget.md</PackageReadmeFile>
+		<PackageTags>Serialization; Serializer; Bytes; Byte Representation</PackageTags>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-  </PropertyGroup>
+	<ItemGroup>
+		<None Include="..\logo.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\README nuget.md">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>Narumikazuchi.Serialization.Bytes.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="..\logo.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="..\README.md">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="..\README nuget.md">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Narumikazuchi" Version="2.2.1" />
-    <PackageReference Include="Narumikazuchi.Serialization" Version="2.1.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Narumikazuchi" Version="2.4.0" />
+		<PackageReference Include="Narumikazuchi.Serialization" Version="2.1.1" />
+	</ItemGroup>
 
 </Project>
