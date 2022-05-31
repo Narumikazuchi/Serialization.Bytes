@@ -23,9 +23,9 @@ partial class IntegratedSerializationStrategies
     {
         System.DateOnly IDeserializationStrategy<System.Byte[], System.DateOnly>.Deserialize(System.Byte[] input)
         {
-            System.Int32 day = BitConverter.ToInt32(input, 0);
+            System.Int32 year = BitConverter.ToInt32(input, 0);
             System.Int32 month = BitConverter.ToInt32(input, 4);
-            System.Int32 year = BitConverter.ToInt32(input, 8);
+            System.Int32 day = BitConverter.ToInt32(input, 8);
             return new(year: year,
                        month: month,
                        day: day);
