@@ -15,6 +15,7 @@ public static partial class IntegratedSerializationStrategies
         { typeof(System.Byte),      Byte.Reference },
         { typeof(System.Char),      Char.Reference },
         { typeof(System.Double),    Double.Reference },
+        { typeof(System.Decimal),   Decimal.Reference },
         { typeof(System.Int16),     Int16.Reference },
         { typeof(System.Int32),     Int32.Reference },
         { typeof(System.Int64),     Int64.Reference },

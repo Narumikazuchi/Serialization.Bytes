@@ -288,6 +288,16 @@
             The statically allocated reference of this struct.
             </summary>
         </member>
+        <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Decimal">
+            <summary>
+            Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Double"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Decimal.Reference">
+            <summary>
+            The statically allocated reference of this struct.
+            </summary>
+        </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Double">
             <summary>
             Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Double"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies.Byte"/>[].
