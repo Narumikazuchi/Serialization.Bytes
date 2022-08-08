@@ -1,33 +1,30 @@
 ﻿namespace Narumikazuchi.Serialization.Bytes;
 
-partial class IntegratedSerializationStrategies
+/// <summary>
+/// Handles serialization of <see cref="HalfStrategy"/> values from and into <see cref="Byte"/>[].
+/// </summary>
+[Singleton]
+public partial class HalfStrategy : ISerializationDeserializationStrategy<Byte[], Half>
 {
-    /// <summary>
-    /// Handles serialization of <see cref="Half"/> values from and into <see cref="Byte"/>[].
-    /// </summary>
-    public readonly partial struct Half : ISerializationDeserializationStrategy<System.Byte[], System.Half>
-    {
-        /// <summary>
-        /// The statically allocated reference of this struct.
-        /// </summary>
-        public static ref Half Reference =>
-            ref s_Reference;
-    }
+    /// <inheritdoc/>
+    public Int32 Priority { get; }
+}
 
-    partial struct Half
-    {
-        private static Half s_Reference = new();
-    }
+partial class HalfStrategy : ITypeAppliedStrategy
+{
+    /// <inheritdoc/>
+    public Boolean CanBeAppliedTo(Type type) =>
+        type == typeof(Half);
+}
 
-    partial struct Half : IDeserializationStrategy<System.Byte[], System.Half>
-    {
-        System.Half IDeserializationStrategy<System.Byte[], System.Half>.Deserialize(System.Byte[] input) =>
-            BitConverter.ToHalf(input);
-    }
+partial class HalfStrategy : IDeserializationStrategy<Byte[], Half>
+{
+    Half IDeserializationStrategy<Byte[], Half>.Deserialize(Byte[] input) =>
+        BitConverter.ToHalf(input);
+}
 
-    partial struct Half : ISerializationStrategy<System.Byte[], System.Half>
-    {
-        System.Byte[] ISerializationStrategy<System.Byte[], System.Half>.Serialize(System.Half input) =>
-            BitConverter.GetBytes(input);
-    }
+partial class HalfStrategy : ISerializationStrategy<Byte[], Half>
+{
+    Byte[] ISerializationStrategy<Byte[], Half>.Serialize(Half input) =>
+        BitConverter.GetBytes(input);
 }

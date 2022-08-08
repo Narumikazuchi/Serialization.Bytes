@@ -1,36 +1,33 @@
 ﻿namespace Narumikazuchi.Serialization.Bytes;
 
-partial class IntegratedSerializationStrategies
+/// <summary>
+/// Handles serialization of <see cref="DateTimeStrategy"/> values from and into <see cref="Byte"/>[].
+/// </summary>
+[Singleton]
+public partial class DateTimeStrategy : ISerializationDeserializationStrategy<Byte[], DateTime>
 {
-    /// <summary>
-    /// Handles serialization of <see cref="DateTime"/> values from and into <see cref="Byte"/>[].
-    /// </summary>
-    public readonly partial struct DateTime : ISerializationDeserializationStrategy<System.Byte[], System.DateTime>
-    {
-        /// <summary>
-        /// The statically allocated reference of this struct.
-        /// </summary>
-        public static ref DateTime Reference =>
-            ref s_Reference;
-    }
+    /// <inheritdoc/>
+    public Int32 Priority { get; }
+}
 
-    partial struct DateTime
-    {
-        private static DateTime s_Reference = new();
-    }
+partial class DateTimeStrategy : ITypeAppliedStrategy
+{
+    /// <inheritdoc/>
+    public Boolean CanBeAppliedTo(Type type) =>
+        type == typeof(DateTime);
+}
 
-    partial struct DateTime : IDeserializationStrategy<System.Byte[], System.DateTime>
+partial class DateTimeStrategy : IDeserializationStrategy<Byte[], DateTime>
+{
+    DateTime IDeserializationStrategy<Byte[], DateTime>.Deserialize(Byte[] input)
     {
-        System.DateTime IDeserializationStrategy<System.Byte[], System.DateTime>.Deserialize(System.Byte[] input)
-        {
-            System.Int64 ticks = BitConverter.ToInt64(input);
-            return new(ticks: ticks);
-        }
+        Int64 ticks = BitConverter.ToInt64(input);
+        return new(ticks: ticks);
     }
+}
 
-    partial struct DateTime : ISerializationStrategy<System.Byte[], System.DateTime>
-    {
-        System.Byte[] ISerializationStrategy<System.Byte[], System.DateTime>.Serialize(System.DateTime input) =>
-            BitConverter.GetBytes(input.Ticks);
-    }
+partial class DateTimeStrategy : ISerializationStrategy<Byte[], DateTime>
+{
+    Byte[] ISerializationStrategy<Byte[], DateTime>.Serialize(DateTime input) =>
+        BitConverter.GetBytes(input.Ticks);
 }

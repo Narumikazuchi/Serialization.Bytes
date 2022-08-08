@@ -1,33 +1,30 @@
 ﻿namespace Narumikazuchi.Serialization.Bytes;
 
-partial class IntegratedSerializationStrategies
+/// <summary>
+/// Handles serialization of <see cref="UIntPtrStrategy"/> values from and into <see cref="Byte"/>[].
+/// </summary>
+[Singleton]
+public partial class UIntPtrStrategy : ISerializationDeserializationStrategy<Byte[], UIntPtr>
 {
-    /// <summary>
-    /// Handles serialization of <see cref="UIntPtr"/> values from and into <see cref="Byte"/>[].
-    /// </summary>
-    public readonly partial struct UIntPtr : ISerializationDeserializationStrategy<System.Byte[], System.UIntPtr>
-    {
-        /// <summary>
-        /// The statically allocated reference of this struct.
-        /// </summary>
-        public static ref UIntPtr Reference =>
-            ref s_Reference;
-    }
+    /// <inheritdoc/>
+    public Int32 Priority { get; }
+}
 
-    partial struct UIntPtr
-    {
-        private static UIntPtr s_Reference = new();
-    }
+partial class UIntPtrStrategy : ITypeAppliedStrategy
+{
+    /// <inheritdoc/>
+    public Boolean CanBeAppliedTo(Type type) =>
+        type == typeof(UIntPtr);
+}
 
-    partial struct UIntPtr : IDeserializationStrategy<System.Byte[], System.UIntPtr>
-    {
-        System.UIntPtr IDeserializationStrategy<System.Byte[], System.UIntPtr>.Deserialize(System.Byte[] input) =>
-            new(value: BitConverter.ToUInt64(input));
-    }
+partial class UIntPtrStrategy : IDeserializationStrategy<Byte[], UIntPtr>
+{
+    UIntPtr IDeserializationStrategy<Byte[], UIntPtr>.Deserialize(Byte[] input) =>
+        new(value: BitConverter.ToUInt64(input));
+}
 
-    partial struct UIntPtr : ISerializationStrategy<System.Byte[], System.UIntPtr>
-    {
-        System.Byte[] ISerializationStrategy<System.Byte[], System.UIntPtr>.Serialize(System.UIntPtr input) =>
-            BitConverter.GetBytes(input.ToUInt64());
-    }
+partial class UIntPtrStrategy : ISerializationStrategy<Byte[], UIntPtr>
+{
+    Byte[] ISerializationStrategy<Byte[], UIntPtr>.Serialize(UIntPtr input) =>
+        BitConverter.GetBytes(input.ToUInt64());
 }

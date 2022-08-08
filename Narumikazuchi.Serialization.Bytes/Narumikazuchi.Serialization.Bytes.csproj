@@ -5,8 +5,9 @@
 		<PlatformTarget>x64</PlatformTarget>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
 		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<WarningsNotAsErrors>1591,0282</WarningsNotAsErrors>
+		<NoWarn>1701;1702,0282</NoWarn>
 		<LangVersion>preview</LangVersion>
 		<EnablePreviewFeatures>True</EnablePreviewFeatures>
 		<GenerateRequiresPreviewFeaturesAttribute>True</GenerateRequiresPreviewFeaturesAttribute>
@@ -16,7 +17,7 @@
 		<Copyright>©2021 Narumikazuchi</Copyright>
 		<RepositoryUrl>https://github.com/Narumikazuchi/Serialization.Bytes</RepositoryUrl>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>2.2.1</Version>
+		<Version>3.0.0-beta</Version>
 		<PackageReleaseNotes>
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -47,8 +48,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Narumikazuchi" Version="2.4.0" />
-		<PackageReference Include="Narumikazuchi.Serialization" Version="2.1.1" />
+		<PackageReference Include="Narumikazuchi.Serialization" Version="3.9999.9999.9" />
+		<PackageReference Include="Narumikazuchi.Singletons" Version="1.0.1-prerelease" />
 	</ItemGroup>
 
 </Project>

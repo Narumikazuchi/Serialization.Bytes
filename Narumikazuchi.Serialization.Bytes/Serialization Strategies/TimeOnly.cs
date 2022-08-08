@@ -1,33 +1,30 @@
 ﻿namespace Narumikazuchi.Serialization.Bytes;
 
-partial class IntegratedSerializationStrategies
+/// <summary>
+/// Handles serialization of <see cref="TimeOnlyStrategy"/> values from and into <see cref="Byte"/>[].
+/// </summary>
+[Singleton]
+public partial class TimeOnlyStrategy : ISerializationDeserializationStrategy<Byte[], TimeOnly>
 {
-    /// <summary>
-    /// Handles serialization of <see cref="TimeOnly"/> values from and into <see cref="Byte"/>[].
-    /// </summary>
-    public readonly partial struct TimeOnly : ISerializationDeserializationStrategy<System.Byte[], System.TimeOnly>
-    {
-        /// <summary>
-        /// The statically allocated reference of this struct.
-        /// </summary>
-        public static ref TimeOnly Reference =>
-            ref s_Reference;
-    }
+    /// <inheritdoc/>
+    public Int32 Priority { get; }
+}
 
-    partial struct TimeOnly
-    {
-        private static TimeOnly s_Reference = new();
-    }
+partial class TimeOnlyStrategy : ITypeAppliedStrategy
+{
+    /// <inheritdoc/>
+    public Boolean CanBeAppliedTo(Type type) =>
+        type == typeof(TimeOnly);
+}
 
-    partial struct TimeOnly : IDeserializationStrategy<System.Byte[], System.TimeOnly>
-    {
-        System.TimeOnly IDeserializationStrategy<System.Byte[], System.TimeOnly>.Deserialize(System.Byte[] input) =>
-            new(ticks: BitConverter.ToInt64(input));
-    }
+partial class TimeOnlyStrategy : IDeserializationStrategy<Byte[], TimeOnly>
+{
+    TimeOnly IDeserializationStrategy<Byte[], TimeOnly>.Deserialize(Byte[] input) =>
+        new(ticks: BitConverter.ToInt64(input));
+}
 
-    partial struct TimeOnly : ISerializationStrategy<System.Byte[], System.TimeOnly>
-    {
-        System.Byte[] ISerializationStrategy<System.Byte[], System.TimeOnly>.Serialize(System.TimeOnly input) =>
-            BitConverter.GetBytes(input.Ticks);
-    }
+partial class TimeOnlyStrategy : ISerializationStrategy<Byte[], TimeOnly>
+{
+    Byte[] ISerializationStrategy<Byte[], TimeOnly>.Serialize(TimeOnly input) =>
+        BitConverter.GetBytes(input.Ticks);
 }

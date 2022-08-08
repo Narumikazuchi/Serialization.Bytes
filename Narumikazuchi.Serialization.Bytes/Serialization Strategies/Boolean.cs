@@ -1,33 +1,30 @@
 ﻿namespace Narumikazuchi.Serialization.Bytes;
 
-partial class IntegratedSerializationStrategies
+/// <summary>
+/// Handles serialization of <see cref="BooleanStrategy"/> values from and into <see cref="Byte"/>[].
+/// </summary>
+[Singleton]
+public partial class BooleanStrategy : ISerializationDeserializationStrategy<Byte[], Boolean>
 {
-    /// <summary>
-    /// Handles serialization of <see cref="Boolean"/> values from and into <see cref="Byte"/>[].
-    /// </summary>
-    public readonly partial struct Boolean : ISerializationDeserializationStrategy<System.Byte[], System.Boolean>
-    {
-        /// <summary>
-        /// The statically allocated reference of this struct.
-        /// </summary>
-        public static ref Boolean Reference => 
-            ref s_Reference;
-    }
+    /// <inheritdoc/>
+    public Int32 Priority { get; }
+}
 
-    partial struct Boolean
-    {
-        private static Boolean s_Reference = new();
-    }
+partial class BooleanStrategy : ITypeAppliedStrategy
+{
+    /// <inheritdoc/>
+    public Boolean CanBeAppliedTo(Type type) =>
+        type == typeof(Boolean);
+}
 
-    partial struct Boolean : IDeserializationStrategy<System.Byte[], System.Boolean>
-    {
-        System.Boolean IDeserializationStrategy<System.Byte[], System.Boolean>.Deserialize(System.Byte[] input) =>
-            BitConverter.ToBoolean(input);
-    }
+partial class BooleanStrategy : IDeserializationStrategy<Byte[], Boolean>
+{
+    Boolean IDeserializationStrategy<Byte[], Boolean>.Deserialize(Byte[] input) =>
+        BitConverter.ToBoolean(input);
+}
 
-    partial struct Boolean : ISerializationStrategy<System.Byte[], System.Boolean>
-    {
-        System.Byte[] ISerializationStrategy<System.Byte[], System.Boolean>.Serialize(System.Boolean input) =>
-            BitConverter.GetBytes(input);
-    }
+partial class BooleanStrategy : ISerializationStrategy<Byte[], Boolean>
+{
+    Byte[] ISerializationStrategy<Byte[], Boolean>.Serialize(Boolean input) =>
+        BitConverter.GetBytes(input);
 }

@@ -1,33 +1,30 @@
 ﻿namespace Narumikazuchi.Serialization.Bytes;
 
-partial class IntegratedSerializationStrategies
+/// <summary>
+/// Handles serialization of <see cref="UInt64Strategy"/> values from and into <see cref="Byte"/>[].
+/// </summary>
+[Singleton]
+public partial class UInt64Strategy : ISerializationDeserializationStrategy<Byte[], UInt64>
 {
-    /// <summary>
-    /// Handles serialization of <see cref="UInt64"/> values from and into <see cref="Byte"/>[].
-    /// </summary>
-    public readonly partial struct UInt64 : ISerializationDeserializationStrategy<System.Byte[], System.UInt64>
-    {
-        /// <summary>
-        /// The statically allocated reference of this struct.
-        /// </summary>
-        public static ref UInt64 Reference =>
-            ref s_Reference;
-    }
+    /// <inheritdoc/>
+    public Int32 Priority { get; }
+}
 
-    partial struct UInt64
-    {
-        private static UInt64 s_Reference = new();
-    }
+partial class UInt64Strategy : ITypeAppliedStrategy
+{
+    /// <inheritdoc/>
+    public Boolean CanBeAppliedTo(Type type) =>
+        type == typeof(UInt64);
+}
 
-    partial struct UInt64 : IDeserializationStrategy<System.Byte[], System.UInt64>
-    {
-        System.UInt64 IDeserializationStrategy<System.Byte[], System.UInt64>.Deserialize(System.Byte[] input) =>
-            BitConverter.ToUInt64(input);
-    }
+partial class UInt64Strategy : IDeserializationStrategy<Byte[], UInt64>
+{
+    UInt64 IDeserializationStrategy<Byte[], UInt64>.Deserialize(Byte[] input) =>
+        BitConverter.ToUInt64(input);
+}
 
-    partial struct UInt64 : ISerializationStrategy<System.Byte[], System.UInt64>
-    {
-        System.Byte[] ISerializationStrategy<System.Byte[], System.UInt64>.Serialize(System.UInt64 input) =>
-            BitConverter.GetBytes(input);
-    }
+partial class UInt64Strategy : ISerializationStrategy<Byte[], UInt64>
+{
+    Byte[] ISerializationStrategy<Byte[], UInt64>.Serialize(UInt64 input) =>
+        BitConverter.GetBytes(input);
 }

@@ -1,33 +1,30 @@
 ﻿namespace Narumikazuchi.Serialization.Bytes;
 
-partial class IntegratedSerializationStrategies
+/// <summary>
+/// Handles serialization of <see cref="IntPtrStrategy"/> values from and into <see cref="ByteStrategy"/>[].
+/// </summary>
+[Singleton]
+public partial class IntPtrStrategy : ISerializationDeserializationStrategy<Byte[], IntPtr>
 {
-    /// <summary>
-    /// Handles serialization of <see cref="IntPtr"/> values from and into <see cref="Byte"/>[].
-    /// </summary>
-    public readonly partial struct IntPtr : ISerializationDeserializationStrategy<System.Byte[], System.IntPtr>
-    {
-        /// <summary>
-        /// The statically allocated reference of this struct.
-        /// </summary>
-        public static ref IntPtr Reference =>
-            ref s_Reference;
-    }
+    /// <inheritdoc/>
+    public Int32 Priority { get; }
+}
 
-    partial struct IntPtr
-    {
-        private static IntPtr s_Reference = new();
-    }
+partial class IntPtrStrategy : ITypeAppliedStrategy
+{
+    /// <inheritdoc/>
+    public Boolean CanBeAppliedTo(Type type) =>
+        type == typeof(IntPtr);
+}
 
-    partial struct IntPtr : IDeserializationStrategy<System.Byte[], System.IntPtr>
-    {
-        System.IntPtr IDeserializationStrategy<System.Byte[], System.IntPtr>.Deserialize(System.Byte[] input) =>
-            new(value: BitConverter.ToInt64(input));
-    }
+partial class IntPtrStrategy : IDeserializationStrategy<Byte[], IntPtr>
+{
+    IntPtr IDeserializationStrategy<Byte[], IntPtr>.Deserialize(Byte[] input) =>
+        new(value: BitConverter.ToInt64(input));
+}
 
-    partial struct IntPtr : ISerializationStrategy<System.Byte[], System.IntPtr>
-    {
-        System.Byte[] ISerializationStrategy<System.Byte[], System.IntPtr>.Serialize(System.IntPtr input) =>
-            BitConverter.GetBytes(input.ToInt64());
-    }
+partial class IntPtrStrategy : ISerializationStrategy<Byte[], IntPtr>
+{
+    Byte[] ISerializationStrategy<Byte[], IntPtr>.Serialize(IntPtr input) =>
+        BitConverter.GetBytes(input.ToInt64());
 }

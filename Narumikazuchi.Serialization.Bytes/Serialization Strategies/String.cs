@@ -1,55 +1,49 @@
 ﻿namespace Narumikazuchi.Serialization.Bytes;
 
-partial class IntegratedSerializationStrategies
+/// <summary>
+/// Handles serialization of <see cref="StringStrategy"/> values from and into <see cref="Byte"/>[].
+/// </summary>
+[Singleton]
+public partial class StringStrategy : ISerializationDeserializationStrategy<Byte[], String>
 {
-    /// <summary>
-    /// Handles serialization of <see cref="String"/> values from and into <see cref="Byte"/>[].
-    /// </summary>
-    public readonly partial struct String : ISerializationDeserializationStrategy<System.Byte[], System.String>
-    {
-        /// <summary>
-        /// The statically allocated reference of this struct.
-        /// </summary>
-        public static ref String Reference =>
-            ref s_Reference;
-    }
+    /// <inheritdoc/>
+    public Int32 Priority { get; } = 1;
+}
 
-    partial struct String
-    {
-        private static String s_Reference = new();
-    }
+partial class StringStrategy : ITypeAppliedStrategy
+{
+    /// <inheritdoc/>
+    public Boolean CanBeAppliedTo(Type type) =>
+        type == typeof(String);
+}
 
-    partial struct String : IDeserializationStrategy<System.Byte[], System.String>
+partial class StringStrategy : IDeserializationStrategy<Byte[], String>
+{
+    String IDeserializationStrategy<Byte[], String>.Deserialize(Byte[] input)
     {
-        System.String IDeserializationStrategy<System.Byte[], System.String>.Deserialize(System.Byte[] input)
+        Int32 size = BitConverter.ToInt32(input);
+        if (size == 0)
         {
-            System.Int32 size = BitConverter.ToInt32(input);
-            if (size == 0)
-            {
-                return System.String
-                             .Empty;
-            }
-            return Encoding.UTF8
-                           .GetString(bytes: input,
-                                      index: 4,
-                                      count: size);
+            return String.Empty;
         }
+        return Encoding.UTF8.GetString(bytes: input,
+                                        index: 4,
+                                        count: size);
     }
+}
 
-    partial struct String : ISerializationStrategy<System.Byte[], System.String>
+partial class StringStrategy : ISerializationStrategy<Byte[], String>
+{
+    Byte[] ISerializationStrategy<Byte[], String>.Serialize(String input)
     {
-        System.Byte[] ISerializationStrategy<System.Byte[], System.String>.Serialize(System.String input)
+        if (input is null)
         {
-            if (input is null)
-            {
-                return new System.Byte[] { 0x00, 0x00, 0x00, 0x00 };
-            }
-
-            System.Byte[] data = Encoding.UTF8
-                                         .GetBytes(s: input);
-            System.Byte[] size = BitConverter.GetBytes(data.Length);
-            return size.Concat(data)
-                       .ToArray();
+            return new Byte[] { 0x00, 0x00, 0x00, 0x00 };
         }
+
+        Byte[] data = Encoding.UTF8.GetBytes(s: input);
+        Byte[] size = BitConverter.GetBytes(data.Length);
+        return size.Concat(data)
+                    .ToArray();
     }
 }

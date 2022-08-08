@@ -1,33 +1,30 @@
 ﻿namespace Narumikazuchi.Serialization.Bytes;
 
-partial class IntegratedSerializationStrategies
+/// <summary>
+/// Handles serialization of <see cref="CharStrategy"/> values from and into <see cref="Byte"/>[].
+/// </summary>
+[Singleton]
+public partial class CharStrategy : ISerializationDeserializationStrategy<Byte[], Char>
 {
-    /// <summary>
-    /// Handles serialization of <see cref="Char"/> values from and into <see cref="Byte"/>[].
-    /// </summary>
-    public readonly partial struct Char : ISerializationDeserializationStrategy<System.Byte[], System.Char>
-    {
-        /// <summary>
-        /// The statically allocated reference of this struct.
-        /// </summary>
-        public static ref Char Reference =>
-            ref s_Reference;
-    }
+    /// <inheritdoc/>
+    public Int32 Priority { get; }
+}
 
-    partial struct Char
-    {
-        private static Char s_Reference = new();
-    }
+partial class CharStrategy : ITypeAppliedStrategy
+{
+    /// <inheritdoc/>
+    public Boolean CanBeAppliedTo(Type type) =>
+        type == typeof(Char);
+}
 
-    partial struct Char : IDeserializationStrategy<System.Byte[], System.Char>
-    {
-        System.Char IDeserializationStrategy<System.Byte[], System.Char>.Deserialize(System.Byte[] input) =>
-            BitConverter.ToChar(input);
-    }
+partial class CharStrategy : IDeserializationStrategy<Byte[], Char>
+{
+    Char IDeserializationStrategy<Byte[], Char>.Deserialize(Byte[] input) =>
+        BitConverter.ToChar(input);
+}
 
-    partial struct Char : ISerializationStrategy<System.Byte[], System.Char>
-    {
-        System.Byte[] ISerializationStrategy<System.Byte[], System.Char>.Serialize(System.Char input) =>
-            BitConverter.GetBytes(input);
-    }
+partial class CharStrategy : ISerializationStrategy<Byte[], Char>
+{
+    Byte[] ISerializationStrategy<Byte[], Char>.Serialize(Char input) =>
+        BitConverter.GetBytes(input);
 }

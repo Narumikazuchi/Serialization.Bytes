@@ -1,33 +1,30 @@
 ﻿namespace Narumikazuchi.Serialization.Bytes;
 
-partial class IntegratedSerializationStrategies
+/// <summary>
+/// Handles serialization of <see cref="DoubleStrategy"/> values from and into <see cref="Byte"/>[].
+/// </summary>
+[Singleton]
+public partial class DoubleStrategy : ISerializationDeserializationStrategy<Byte[], Double>
 {
-    /// <summary>
-    /// Handles serialization of <see cref="Double"/> values from and into <see cref="Byte"/>[].
-    /// </summary>
-    public readonly partial struct Double : ISerializationDeserializationStrategy<System.Byte[], System.Double>
-    {
-        /// <summary>
-        /// The statically allocated reference of this struct.
-        /// </summary>
-        public static ref Double Reference =>
-            ref s_Reference;
-    }
+    /// <inheritdoc/>
+    public Int32 Priority { get; }
+}
 
-    partial struct Double
-    {
-        private static Double s_Reference = new();
-    }
+partial class DoubleStrategy : ITypeAppliedStrategy
+{
+    /// <inheritdoc/>
+    public Boolean CanBeAppliedTo(Type type) =>
+        type == typeof(Double);
+}
 
-    partial struct Double : IDeserializationStrategy<System.Byte[], System.Double>
-    {
-        System.Double IDeserializationStrategy<System.Byte[], System.Double>.Deserialize(System.Byte[] input) =>
-            BitConverter.ToDouble(input);
-    }
+partial class DoubleStrategy : IDeserializationStrategy<Byte[], Double>
+{
+    Double IDeserializationStrategy<Byte[], Double>.Deserialize(Byte[] input) =>
+        BitConverter.ToDouble(input);
+}
 
-    partial struct Double : ISerializationStrategy<System.Byte[], System.Double>
-    {
-        System.Byte[] ISerializationStrategy<System.Byte[], System.Double>.Serialize(System.Double input) =>
-            BitConverter.GetBytes(input);
-    }
+partial class DoubleStrategy : ISerializationStrategy<Byte[], Double>
+{
+    Byte[] ISerializationStrategy<Byte[], Double>.Serialize(Double input) =>
+        BitConverter.GetBytes(input);
 }

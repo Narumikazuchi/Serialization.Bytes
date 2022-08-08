@@ -1,33 +1,30 @@
 ﻿namespace Narumikazuchi.Serialization.Bytes;
 
-partial class IntegratedSerializationStrategies
+/// <summary>
+/// Handles serialization of <see cref="Int32Strategy"/> values from and into <see cref="ByteStrategy"/>[].
+/// </summary>
+[Singleton]
+public partial class Int32Strategy : ISerializationDeserializationStrategy<Byte[], Int32>
 {
-    /// <summary>
-    /// Handles serialization of <see cref="Int32"/> values from and into <see cref="Byte"/>[].
-    /// </summary>
-    public readonly partial struct Int32 : ISerializationDeserializationStrategy<System.Byte[], System.Int32>
-    {
-        /// <summary>
-        /// The statically allocated reference of this struct.
-        /// </summary>
-        public static ref Int32 Reference =>
-            ref s_Reference;
-    }
+    /// <inheritdoc/>
+    public Int32 Priority { get; }
+}
 
-    partial struct Int32
-    {
-        private static Int32 s_Reference = new();
-    }
+partial class Int32Strategy : ITypeAppliedStrategy
+{
+    /// <inheritdoc/>
+    public Boolean CanBeAppliedTo(Type type) =>
+        type == typeof(Int32);
+}
 
-    partial struct Int32 : IDeserializationStrategy<System.Byte[], System.Int32>
-    {
-        System.Int32 IDeserializationStrategy<System.Byte[], System.Int32>.Deserialize(System.Byte[] input) =>
-            BitConverter.ToInt32(input);
-    }
+partial class Int32Strategy : IDeserializationStrategy<Byte[], Int32>
+{
+    Int32 IDeserializationStrategy<Byte[], Int32>.Deserialize(Byte[] input) =>
+        BitConverter.ToInt32(input);
+}
 
-    partial struct Int32 : ISerializationStrategy<System.Byte[], System.Int32>
-    {
-        System.Byte[] ISerializationStrategy<System.Byte[], System.Int32>.Serialize(System.Int32 input) =>
-            BitConverter.GetBytes(input);
-    }
+partial class Int32Strategy : ISerializationStrategy<Byte[], Int32>
+{
+    Byte[] ISerializationStrategy<Byte[], Int32>.Serialize(Int32 input) =>
+        BitConverter.GetBytes(input);
 }

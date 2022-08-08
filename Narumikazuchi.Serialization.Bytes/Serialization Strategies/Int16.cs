@@ -1,33 +1,30 @@
 ﻿namespace Narumikazuchi.Serialization.Bytes;
 
-partial class IntegratedSerializationStrategies
+/// <summary>
+/// Handles serialization of <see cref="Int16Strategy"/> values from and into <see cref="Byte"/>[].
+/// </summary>
+[Singleton]
+public partial class Int16Strategy : ISerializationDeserializationStrategy<Byte[], Int16>
 {
-    /// <summary>
-    /// Handles serialization of <see cref="Int16"/> values from and into <see cref="Byte"/>[].
-    /// </summary>
-    public readonly partial struct Int16 : ISerializationDeserializationStrategy<System.Byte[], System.Int16>
-    {
-        /// <summary>
-        /// The statically allocated reference of this struct.
-        /// </summary>
-        public static ref Int16 Reference =>
-            ref s_Reference;
-    }
+    /// <inheritdoc/>
+    public Int32 Priority { get; }
+}
 
-    partial struct Int16
-    {
-        private static Int16 s_Reference = new();
-    }
+partial class Int16Strategy : ITypeAppliedStrategy
+{
+    /// <inheritdoc/>
+    public Boolean CanBeAppliedTo(Type type) =>
+        type == typeof(Int16);
+}
 
-    partial struct Int16 : IDeserializationStrategy<System.Byte[], System.Int16>
-    {
-        System.Int16 IDeserializationStrategy<System.Byte[], System.Int16>.Deserialize(System.Byte[] input) =>
-            BitConverter.ToInt16(input);
-    }
+partial class Int16Strategy : IDeserializationStrategy<Byte[], Int16>
+{
+    Int16 IDeserializationStrategy<Byte[], Int16>.Deserialize(Byte[] input) =>
+        BitConverter.ToInt16(input);
+}
 
-    partial struct Int16 : ISerializationStrategy<System.Byte[], System.Int16>
-    {
-        System.Byte[] ISerializationStrategy<System.Byte[], System.Int16>.Serialize(System.Int16 input) =>
-            BitConverter.GetBytes(input);
-    }
+partial class Int16Strategy : ISerializationStrategy<Byte[], Int16>
+{
+    Byte[] ISerializationStrategy<Byte[], Int16>.Serialize(Int16 input) =>
+        BitConverter.GetBytes(input);
 }
