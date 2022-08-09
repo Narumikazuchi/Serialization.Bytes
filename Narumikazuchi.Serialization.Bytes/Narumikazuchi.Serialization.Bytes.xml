@@ -209,6 +209,16 @@
         <member name="M:Narumikazuchi.Serialization.Bytes.BooleanStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
         </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.BooleanStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.BooleanStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
+        </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.ByteStrategy">
             <summary>
             Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.ByteStrategy"/> values from and into <see cref="T:System.Byte"/>[].
@@ -219,6 +229,16 @@
         </member>
         <member name="M:Narumikazuchi.Serialization.Bytes.ByteStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.ByteStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.ByteStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
         </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.CharStrategy">
             <summary>
@@ -231,6 +251,16 @@
         <member name="M:Narumikazuchi.Serialization.Bytes.CharStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
         </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.CharStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.CharStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
+        </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.DateOnlyStrategy">
             <summary>
             Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.DateOnlyStrategy"/> values from and into <see cref="T:System.Byte"/>[].
@@ -241,6 +271,16 @@
         </member>
         <member name="M:Narumikazuchi.Serialization.Bytes.DateOnlyStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.DateOnlyStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.DateOnlyStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
         </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.DateTimeStrategy">
             <summary>
@@ -253,6 +293,16 @@
         <member name="M:Narumikazuchi.Serialization.Bytes.DateTimeStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
         </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.DateTimeStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.DateTimeStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
+        </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.DecimalStrategy">
             <summary>
             Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.DoubleStrategy"/> values from and into <see cref="T:System.Byte"/>[].
@@ -263,6 +313,16 @@
         </member>
         <member name="M:Narumikazuchi.Serialization.Bytes.DecimalStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.DecimalStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.DecimalStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
         </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.DoubleStrategy">
             <summary>
@@ -275,6 +335,16 @@
         <member name="M:Narumikazuchi.Serialization.Bytes.DoubleStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
         </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.DoubleStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.DoubleStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
+        </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.GuidStrategy">
             <summary>
             Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.GuidStrategy"/> values from and into <see cref="T:System.Byte"/>[].
@@ -285,6 +355,16 @@
         </member>
         <member name="M:Narumikazuchi.Serialization.Bytes.GuidStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.GuidStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.GuidStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
         </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.HalfStrategy">
             <summary>
@@ -297,6 +377,16 @@
         <member name="M:Narumikazuchi.Serialization.Bytes.HalfStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
         </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.HalfStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.HalfStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
+        </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.Int16Strategy">
             <summary>
             Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.Int16Strategy"/> values from and into <see cref="T:System.Byte"/>[].
@@ -307,6 +397,16 @@
         </member>
         <member name="M:Narumikazuchi.Serialization.Bytes.Int16Strategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.Int16Strategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.Int16Strategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
         </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.Int32Strategy">
             <summary>
@@ -319,6 +419,16 @@
         <member name="M:Narumikazuchi.Serialization.Bytes.Int32Strategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
         </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.Int32Strategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.Int32Strategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
+        </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.Int64Strategy">
             <summary>
             Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.Int64Strategy"/> values from and into <see cref="T:System.Byte"/>[].
@@ -329,6 +439,16 @@
         </member>
         <member name="M:Narumikazuchi.Serialization.Bytes.Int64Strategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.Int64Strategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.Int64Strategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
         </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.IntegratedSerializationStrategies">
             <summary>
@@ -352,6 +472,16 @@
         <member name="M:Narumikazuchi.Serialization.Bytes.IntPtrStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
         </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntPtrStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.IntPtrStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
+        </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.SByteStrategy">
             <summary>
             Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.SByteStrategy"/> values from and into <see cref="T:Narumikazuchi.Serialization.Bytes.ByteStrategy"/>[].
@@ -362,6 +492,16 @@
         </member>
         <member name="M:Narumikazuchi.Serialization.Bytes.SByteStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.SByteStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.SByteStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
         </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.SingleStrategy">
             <summary>
@@ -374,6 +514,16 @@
         <member name="M:Narumikazuchi.Serialization.Bytes.SingleStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
         </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.SingleStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.SingleStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
+        </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.StringStrategy">
             <summary>
             Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.StringStrategy"/> values from and into <see cref="T:System.Byte"/>[].
@@ -384,6 +534,16 @@
         </member>
         <member name="M:Narumikazuchi.Serialization.Bytes.StringStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.StringStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.StringStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
         </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.TimeOnlyStrategy">
             <summary>
@@ -396,6 +556,16 @@
         <member name="M:Narumikazuchi.Serialization.Bytes.TimeOnlyStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
         </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.TimeOnlyStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.TimeOnlyStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
+        </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.TimeSpanStrategy">
             <summary>
             Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.TimeSpanStrategy"/> values from and into <see cref="T:System.Byte"/>[].
@@ -406,6 +576,16 @@
         </member>
         <member name="M:Narumikazuchi.Serialization.Bytes.TimeSpanStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.TimeSpanStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.TimeSpanStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
         </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.UInt16Strategy">
             <summary>
@@ -418,6 +598,16 @@
         <member name="M:Narumikazuchi.Serialization.Bytes.UInt16Strategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
         </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.UInt16Strategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.UInt16Strategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
+        </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.UInt32Strategy">
             <summary>
             Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.UInt32Strategy"/> values from and into <see cref="T:System.Byte"/>[].
@@ -428,6 +618,16 @@
         </member>
         <member name="M:Narumikazuchi.Serialization.Bytes.UInt32Strategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.UInt32Strategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.UInt32Strategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
         </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.UInt64Strategy">
             <summary>
@@ -440,6 +640,16 @@
         <member name="M:Narumikazuchi.Serialization.Bytes.UInt64Strategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
         </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.UInt64Strategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.UInt64Strategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
+        </member>
         <member name="T:Narumikazuchi.Serialization.Bytes.UIntPtrStrategy">
             <summary>
             Handles serialization of <see cref="T:Narumikazuchi.Serialization.Bytes.UIntPtrStrategy"/> values from and into <see cref="T:System.Byte"/>[].
@@ -450,6 +660,61 @@
         </member>
         <member name="M:Narumikazuchi.Serialization.Bytes.UIntPtrStrategy.CanBeAppliedTo(System.Type)">
             <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.UIntPtrStrategy.Instance">
+            <summary>
+            Gets the single instance of the singleton.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Serialization.Bytes.UIntPtrStrategy.IsInstanceCreated">
+            <summary>
+            Gets whether the single instance of the singleton has been created.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Singletons.SingletonAttribute">
+            <summary>
+            Marks a class as a singleton.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Singletons.SingletonAttribute.#ctor">
+            <summary>
+            Default Constructor.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Singletons.SingletonWithParametersAttribute">
+            <summary>
+            Marks a class as a singleton, which will take in parameters to instantiate.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Singletons.SingletonWithParametersAttribute.#ctor">
+            <summary>
+            Default Constructor.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Singletons.SingletonWithParametersAttribute.#ctor(System.String)">
+            <summary>
+            Default Constructor.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Singletons.SingletonWithInstantiationAttribute">
+            <summary>
+            Marks a class as a singleton, which has a more profound custom initiation.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Singletons.SingletonWithInstantiationAttribute.#ctor">
+            <summary>
+            Default Constructor.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Singletons.Singleton">
+            <summary>
+            The base class of all singletons.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Singletons.Singleton.#ctor">
+            <summary>
+            The base constructor of all singletons.
+            </summary>
         </member>
     </members>
 </doc>

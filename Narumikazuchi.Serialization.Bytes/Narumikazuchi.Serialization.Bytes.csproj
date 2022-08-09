@@ -17,7 +17,7 @@
 		<Copyright>©2021 Narumikazuchi</Copyright>
 		<RepositoryUrl>https://github.com/Narumikazuchi/Serialization.Bytes</RepositoryUrl>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>3.0.0-beta</Version>
+		<Version>3.0.1-beta</Version>
 		<PackageReleaseNotes>
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -49,7 +49,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Narumikazuchi.Serialization" Version="3.9999.9999.9" />
-		<PackageReference Include="Narumikazuchi.Singletons" Version="1.0.1-prerelease" />
+		<PackageReference Include="Narumikazuchi.Singletons" Version="1.0.2-prerelease" />
 	</ItemGroup>
 
 </Project>
