@@ -68,13 +68,12 @@ internal class __Header
     }
 
     internal static __Header FromStream<TStream>(TStream stream,
+                                                 Int64 sizeOfHead,
+                                                 Int64 sizeOfBody,
                                                  out UInt64 read)
         where TStream : IReadableStream
     {
-        read = 0;
-        Int64 sizeOfObject = stream.ReadInt64(ref read);
-        Int64 sizeOfHead = stream.ReadInt64(ref read);
-        Int64 sizeOfBody = stream.ReadInt64(ref read);
+        read = sizeof(Int64) * 3;
         if (!stream.ReadByte(out Byte? singleByte))
         {
             throw new IOException();

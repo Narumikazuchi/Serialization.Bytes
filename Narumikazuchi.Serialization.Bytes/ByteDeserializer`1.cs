@@ -98,13 +98,40 @@ partial class ByteDeserializer<TSerializable>
     {
         read = 0;
 
-        if (stream.Length - stream.Position < sizeof(Int64) * 3 + 1)
+        Int64 sizeOfHead = 0;
+        Int64 sizeOfBody = 0;
+        for (Int32 i = 0;
+             i < 3;
+             i++)
         {
-            return default;
+            Byte[] bytes = new Byte[sizeof(Int64)];
+            for (Int32 j = 0;
+                 j < bytes.Length;
+                 j++)
+            {
+                if (stream.ReadByte(out Byte? value))
+                {
+                    bytes[j] = value.Value;
+                }
+                else
+                {
+                    return default;
+                }
+            }
+
+            if (i == 1)
+            {
+                sizeOfHead = Convert.ToInt64(bytes);
+            }
+            else
+            {
+                sizeOfBody = Convert.ToInt64(bytes);
+            }
         }
 
-        Int64 start = stream.Position;
         __Header header = __Header.FromStream(stream: stream,
+                                              sizeOfHead: sizeOfHead,
+                                              sizeOfBody: sizeOfBody,
                                               read: out read);
 
         if (header.Flags.HasFlag(__HeaderFlags.IsNull))
@@ -115,7 +142,6 @@ partial class ByteDeserializer<TSerializable>
         {
             // Read all bytes from the body
             Byte[] body = new Byte[header.SizeOfBody];
-            stream.Position = start + header.SizeOfHeader;
             stream.Read(body);
             read = (UInt64)header.SizeOfEntireObject;
             // Serialized type
@@ -548,7 +574,18 @@ partial class ByteDeserializer<TSerializable> : IDeserializer<TSerializable>
     {
         if (offset > -1)
         {
-            stream.Position = offset;
+            if (stream is INonContinousStream nonContinousStream)
+            {
+                nonContinousStream.Position = offset;
+            }
+            else if (stream is ISeekableStream seekableStream)
+            {
+                seekableStream.Position = offset;
+            }
+            else
+            {
+                throw new NotSupportedException("The stream does not support an offset.");
+            }
         }
 
         TSerializable? result = this.DeserializeInternal(stream: stream,
@@ -556,7 +593,18 @@ partial class ByteDeserializer<TSerializable> : IDeserializer<TSerializable>
 
         if (actionAfter.HasFlag(SerializationFinishAction.MoveToBeginning))
         {
-            stream.Position = 0;
+            if (stream is INonContinousStream nonContinousStream)
+            {
+                nonContinousStream.Position = 0;
+            }
+            else if (stream is ISeekableStream seekableStream)
+            {
+                seekableStream.Position = 0;
+            }
+            else
+            {
+                throw new NotSupportedException("The stream does not support moving.");
+            }
         }
         if (actionAfter.HasFlag(SerializationFinishAction.CloseStream))
         {
@@ -626,7 +674,20 @@ partial class ByteDeserializer<TSerializable> : IDeserializer<TSerializable>
     {
         if (offset > -1)
         {
-            stream.Position = offset;
+            if (stream is INonContinousStream nonContinousStream)
+            {
+                nonContinousStream.Position = offset;
+            }
+            else if (stream is ISeekableStream seekableStream)
+            {
+                seekableStream.Position = offset;
+            }
+            else
+            {
+                read = 0;
+                result = default;
+                return false;
+            }
         }
 
         result = this.DeserializeInternal(stream: stream,
@@ -634,7 +695,14 @@ partial class ByteDeserializer<TSerializable> : IDeserializer<TSerializable>
 
         if (actionAfter.HasFlag(SerializationFinishAction.MoveToBeginning))
         {
-            stream.Position = 0;
+            if (stream is INonContinousStream nonContinousStream)
+            {
+                nonContinousStream.Position = 0;
+            }
+            else if (stream is ISeekableStream seekableStream)
+            {
+                seekableStream.Position = 0;
+            }
         }
         if (actionAfter.HasFlag(SerializationFinishAction.CloseStream))
         {

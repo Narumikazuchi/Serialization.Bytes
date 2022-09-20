@@ -1,31 +1,42 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<PlatformTarget>x64</PlatformTarget>
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
-		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-		<WarningsNotAsErrors>1591,0282</WarningsNotAsErrors>
-		<NoWarn>1701;1702,0282</NoWarn>
 		<LangVersion>preview</LangVersion>
+		<PlatformTarget>x64</PlatformTarget>
+	</PropertyGroup>
+
+	<PropertyGroup>
 		<EnablePreviewFeatures>True</EnablePreviewFeatures>
 		<GenerateRequiresPreviewFeaturesAttribute>True</GenerateRequiresPreviewFeaturesAttribute>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<WarningsNotAsErrors>0282;1591;1701;1702</WarningsNotAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup>
 		<DocumentationFile>Narumikazuchi.Serialization.Bytes.xml</DocumentationFile>
 		<Authors>Narumikazuchi</Authors>
-		<Description>An implementation of the Narumikazuchi.Serialization interfaces to serialize classes into an array of bytes. For more information about it's usage visit the [wiki](https://github.com/Narumikazuchi/Serialization/wiki).</Description>
-		<Copyright>©2021 Narumikazuchi</Copyright>
+		<Copyright>©2022 Narumikazuchi</Copyright>
+		<Version>3.0.2-beta</Version>
+	</PropertyGroup>
+
+	<PropertyGroup>
 		<RepositoryUrl>https://github.com/Narumikazuchi/Serialization.Bytes</RepositoryUrl>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>3.0.1-beta</Version>
 		<PackageReleaseNotes>
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<NoPackageAnalysis>true</NoPackageAnalysis>
 		<PackageProjectUrl>https://github.com/Narumikazuchi/Serialization.Bytes/wiki</PackageProjectUrl>
 		<PackageIcon>logo.png</PackageIcon>
-		<PackageReadmeFile>README nuget.md</PackageReadmeFile>
+		<PackageTags>Enum; Convertable; Attribute; Pointer</PackageTags>
 		<PackageTags>Serialization; Serializer; Bytes; Byte Representation</PackageTags>
+		<Description>An implementation of the Narumikazuchi.Serialization interfaces to serialize classes into an array of bytes. For more information about it's usage visit the [wiki](https://github.com/Narumikazuchi/Serialization/wiki).</Description>
+		<Title>$(AssemblyName)</Title>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -48,7 +59,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Narumikazuchi.Serialization" Version="3.9999.9999.9" />
+		<PackageReference Include="Narumikazuchi.Serialization" Version="4.0.1-beta" />
 		<PackageReference Include="Narumikazuchi.Singletons" Version="1.0.2-prerelease" />
 	</ItemGroup>
 

@@ -685,7 +685,18 @@ partial class ByteSerializer<TSerializable> : ISerializer<TSerializable>
     {
         if (offset > -1)
         {
-            stream.Position = offset;
+            if (stream is INonContinousStream nonContinousStream)
+            {
+                nonContinousStream.Position = offset;
+            }
+            else if (stream is ISeekableStream seekableStream)
+            {
+                seekableStream.Position = offset;
+            }
+            else
+            {
+                throw new NotSupportedException("The stream does not support an offset.");
+            }
         }
 
         UInt64 result = this.SerializeInternal(stream: stream,
@@ -693,7 +704,18 @@ partial class ByteSerializer<TSerializable> : ISerializer<TSerializable>
 
         if (actionAfter.HasFlag(SerializationFinishAction.MoveToBeginning))
         {
-            stream.Position = 0;
+            if (stream is INonContinousStream nonContinousStream)
+            {
+                nonContinousStream.Position = 0;
+            }
+            else if (stream is ISeekableStream seekableStream)
+            {
+                seekableStream.Position = 0;
+            }
+            else
+            {
+                throw new NotSupportedException("The stream does not support moving.");
+            }
         }
         if (actionAfter.HasFlag(SerializationFinishAction.FlushStream))
         {
@@ -774,7 +796,19 @@ partial class ByteSerializer<TSerializable> : ISerializer<TSerializable>
     {
         if (offset > -1)
         {
-            stream.Position = offset;
+            if (stream is INonContinousStream nonContinousStream)
+            {
+                nonContinousStream.Position = offset;
+            }
+            else if (stream is ISeekableStream seekableStream)
+            {
+                seekableStream.Position = offset;
+            }
+            else
+            {
+                written = 0;
+                return false;
+            }
         }
         try
         {
@@ -789,7 +823,14 @@ partial class ByteSerializer<TSerializable> : ISerializer<TSerializable>
 
         if (actionAfter.HasFlag(SerializationFinishAction.MoveToBeginning))
         {
-            stream.Position = 0;
+            if (stream is INonContinousStream nonContinousStream)
+            {
+                nonContinousStream.Position = 0;
+            }
+            else if (stream is ISeekableStream seekableStream)
+            {
+                seekableStream.Position = 0;
+            }
         }
         if (actionAfter.HasFlag(SerializationFinishAction.FlushStream))
         {

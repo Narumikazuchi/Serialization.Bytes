@@ -18,7 +18,7 @@ partial class __InMemoryStream : IAsyncDisposable
 }
 
 // IContainedStream
-partial class __InMemoryStream : IContainedStream
+partial class __InMemoryStream : INonContinousStream
 {
     public Int64 Length =>
         m_Stream.Length;
