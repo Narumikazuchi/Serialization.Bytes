@@ -21,7 +21,7 @@
 		<DocumentationFile>Narumikazuchi.Serialization.Bytes.xml</DocumentationFile>
 		<Authors>Narumikazuchi</Authors>
 		<Copyright>©2022 Narumikazuchi</Copyright>
-		<Version>3.0.2-beta</Version>
+		<Version>3.0.3-beta</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -59,7 +59,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Narumikazuchi.Serialization" Version="4.0.1-beta" />
+		<PackageReference Include="Narumikazuchi.Serialization" Version="3.0.0-beta" />
 		<PackageReference Include="Narumikazuchi.Singletons" Version="1.0.2-prerelease" />
 	</ItemGroup>
 
