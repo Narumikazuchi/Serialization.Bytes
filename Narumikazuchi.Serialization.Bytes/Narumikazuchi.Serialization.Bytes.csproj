@@ -21,7 +21,7 @@
 		<DocumentationFile>Narumikazuchi.Serialization.Bytes.xml</DocumentationFile>
 		<Authors>Narumikazuchi</Authors>
 		<Copyright>©2022 Narumikazuchi</Copyright>
-		<Version>3.0.4-beta</Version>
+		<Version>3.0.5-beta</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -38,6 +38,23 @@
 		<Description>An implementation of the Narumikazuchi.Serialization interfaces to serialize classes into an array of bytes. For more information about it's usage visit the [wiki](https://github.com/Narumikazuchi/Serialization/wiki).</Description>
 		<Title>$(AssemblyName)</Title>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<Using Include="Narumikazuchi.Collections" />
+		<Using Include="Narumikazuchi.InputOutput" />
+		<Using Include="Narumikazuchi.Singletons" />
+		<Using Include="System" />
+		<Using Include="System.Collections" />
+		<Using Include="System.Collections.Generic" />
+		<Using Include="System.Diagnostics" />
+		<Using Include="System.Diagnostics.CodeAnalysis" />
+		<Using Include="System.IO" />
+		<Using Include="System.Linq" />
+		<Using Include="System.Reflection" />
+		<Using Include="System.Text" />
+		<Using Include="System.Threading" />
+		<Using Include="System.Threading.Tasks" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="..\logo.png">
@@ -59,7 +76,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Narumikazuchi.Serialization" Version="3.0.0-beta" />
+		<PackageReference Include="Narumikazuchi.Serialization" Version="3.0.2-beta" />
 		<PackageReference Include="Narumikazuchi.Singletons" Version="1.0.3-beta" />
 	</ItemGroup>
 
