@@ -1,3 +1,5 @@
+# THIS PROJECT IS SUPERCEDED BY THE [Generators.ByteSerialization](https://github.com/Narumikazuchi/Generators.ByteSerialization) PROJECT AND WILL NO LONGER BE MAINTAINED!
+
 ![Logo](../main/logo.png)
 
 # Description
